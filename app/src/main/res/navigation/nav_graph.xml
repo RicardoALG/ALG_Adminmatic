@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainMenu">
+
+    <activity
+        android:id="@+id/mainMenu"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.MainMenu"
+        android:label="activity_main_menu"
+        tools:layout="@layout/activity_main_menu" />
+    <activity
+        android:id="@+id/customersList"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.CustomersList"
+        android:label="activity_customers_list"
+        tools:layout="@layout/activity_customers_list" />
+    <activity
+        android:id="@+id/employeesList"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.EmployeesList"
+        android:label="activity_employees_list"
+        tools:layout="@layout/activity_employees_list" />
+    <activity
+        android:id="@+id/vendorList"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.VendorList"
+        android:label="activity_vendor_list"
+        tools:layout="@layout/activity_vendor_list" />
+    <activity
+        android:id="@+id/itemsList"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.ItemsList"
+        android:label="activity_items_list"
+        tools:layout="@layout/activity_items_list" />
+    <activity
+        android:id="@+id/scheduleList"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.ScheduleList"
+        android:label="activity_schedule_list"
+        tools:layout="@layout/activity_schedule_list" />
+    <activity
+        android:id="@+id/scheduleSettings"
+        android:name="com.atlanticlawnandgarden.alg_adminmatic.ScheduleSettings"
+        android:label="activity_schedule_settings"
+        tools:layout="@layout/activity_schedule_settings" />
+</navigation>
