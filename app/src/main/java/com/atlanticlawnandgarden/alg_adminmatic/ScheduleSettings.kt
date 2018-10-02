@@ -1,6 +1,7 @@
 package com.atlanticlawnandgarden.alg_adminmatic
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +21,11 @@ class ScheduleSettings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule_settings)
 
+        btn_back.setOnClickListener(({
+            var clickintent = Intent(this@ScheduleSettings, ScheduleList::class.java)
+            startActivity(clickintent)
+        }))
+
         //Calendar
 
         val c= Calendar.getInstance()
@@ -34,7 +40,7 @@ class ScheduleSettings : AppCompatActivity() {
         btn_start_date.setOnClickListener{
             val dpd = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view: DatePicker, mYear , mMonth , mDay ->
 
-            txt_start_date.setText(""+ mMonth +"/"+ mDay + "/" + mYear )},year,month,day)
+            txt_start_date.setText(""+(mMonth +1) +"/"+ mDay + "/" + mYear )},year,month,day)
 
             dpd.show()
         }
@@ -42,7 +48,7 @@ class ScheduleSettings : AppCompatActivity() {
         btn_stop_date.setOnClickListener{
             val dpd = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view: DatePicker, mYear , mMonth , mDay ->
 
-                txt_stop_date.setText(""+ mMonth +"/"+ mDay + "/" + mYear )},year,month,day)
+                txt_stop_date.setText(""+ (mMonth +1) +"/"+ mDay + "/" + mYear )},year,month,day)
 
             dpd.show()
         }
