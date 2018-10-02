@@ -15,5 +15,10 @@ class ImagesList : AppCompatActivity() {
             var clickintent = Intent(this@ImagesList, MainMenu::class.java)
             startActivity(clickintent)
         }))
+
+        btn_img_01.setOnClickListener(({
+            var clickintent = Intent(this@ImagesList, ImageDetails::class.java)
+            startActivity(clickintent)
+        }))
     }
 }

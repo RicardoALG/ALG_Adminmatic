@@ -61,35 +61,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:padding="5dp"
             android:weightSum="3">
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="110dp"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/ic_images"
-                    android:layout_weight="1"
-                    android:clickable="true">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:background="#CC073201"
-                        android:padding="4dp"
-                        android:text="Dame Craneo"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/btn_img_01"
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/ic_images"
                 android:layout_weight="1"
-
+                android:background="@drawable/ic_images"
                 android:clickable="true">
 
                 <TextView
@@ -98,17 +79,18 @@
                     android:layout_alignParentBottom="true"
                     android:background="#CC073201"
                     android:padding="4dp"
-                    android:text="Dame Craneo"
+                    android:text="Imagename"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_margin="2dp"
-                android:background="@drawable/ic_images"
                 android:layout_weight="1"
+                android:background="@drawable/ic_images"
 
                 android:clickable="true">
 
@@ -118,13 +100,78 @@
                     android:layout_alignParentBottom="true"
                     android:background="#CC073201"
                     android:padding="4dp"
-                    android:text="Dame Craneo"
+                    android:text="Imagename"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_images"
+
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="#CC073201"
+                    android:padding="4dp"
+                    android:text="Imagename"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#073201"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:paddingTop="20dp"
+            android:text="@string/add_images"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_schedule_settings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_schedule_settings"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_settings" />
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>

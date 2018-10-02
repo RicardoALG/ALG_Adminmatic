@@ -53,7 +53,8 @@
         <activity android:name=".ScheduleList" />
         <activity android:name=".ScheduleSettings" />
         <activity android:name=".PerformanceList" />
-        <activity android:name=".ImagesList"></activity>
+        <activity android:name=".ImagesList" />
+        <activity android:name=".ImageDetails"></activity>
     </application>
 
 </manifest>

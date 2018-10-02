@@ -52,5 +52,6 @@
     <string name="number_qty">0.45</string>
     <string name="searchImageTags">Search Image Tags</string>
     <string name="imagetitle">Image Title</string>
+    <string name="add_images">Add Images</string>
 
 </resources>
