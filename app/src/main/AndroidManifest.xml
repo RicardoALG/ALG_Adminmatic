@@ -17,6 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainMenu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Customer" />
         <activity android:name=".Employee" />
@@ -46,13 +51,9 @@
             android:label="@string/title_activity_item_disp"
             android:theme="@style/AppTheme" />
         <activity android:name=".ScheduleList" />
-        <activity android:name=".ScheduleSettings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ScheduleSettings" />
+        <activity android:name=".PerformanceList" />
+        <activity android:name=".ImagesList"></activity>
     </application>
 
 </manifest>

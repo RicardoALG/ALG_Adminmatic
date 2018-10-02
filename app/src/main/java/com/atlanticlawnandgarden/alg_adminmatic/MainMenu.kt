@@ -31,5 +31,20 @@ class MainMenu : AppCompatActivity() {
             startActivity(clickintent)
         }))
 
+        btn_schedule.setOnClickListener(({
+            var clickintent = Intent(this@MainMenu, ScheduleList::class.java)
+            startActivity(clickintent)
+        }))
+
+        btn_performance.setOnClickListener(({
+            var clickintent = Intent(this@MainMenu, PerformanceList::class.java)
+            startActivity(clickintent)
+        }))
+
+        btn_images.setOnClickListener(({
+            var clickintent = Intent(this@MainMenu, ImagesList::class.java)
+            startActivity(clickintent)
+        }))
+
     }
 }
