@@ -81,7 +81,8 @@
                 -->
             </intent-filter>
         </activity>
-        <activity android:name=".EquipmentList"></activity>
+        <activity android:name=".EquipmentList" />
+        <activity android:name=".Equipment"></activity>
     </application>
 
 </manifest>

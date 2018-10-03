@@ -7,4 +7,6 @@
     <string name="search_forEquipment">Search for Equipment</string>
     <string name="type">Type</string>
     <string name="status">Status</string>
+    <string name="add_equipment">Add Equipment</string>
+    <string name="edit_fields">Edit Fields</string>
 </resources>
