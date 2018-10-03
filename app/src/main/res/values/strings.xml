@@ -54,5 +54,14 @@
     <string name="imagetitle">Image Title</string>
     <string name="add_images">Add Images</string>
     <string name="title_gizmos">gizmos</string>
+    <string name="search_forEquipment">Search for Equipment</string>
+    <string name="crew">Crew</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="work_order_s_found">### Work Order(s) Found</string>
+    <string name="view_s_schedule">View _____\'s Schedule</string>
 
 </resources>

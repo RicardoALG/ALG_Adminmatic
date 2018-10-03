@@ -45,6 +45,11 @@ class MainMenu : AppCompatActivity() {
             var clickintent = Intent(this@MainMenu, ImagesList::class.java)
             startActivity(clickintent)
         }))
+        btn_equipment.setOnClickListener(({
+            var clickintent = Intent(this@MainMenu, EquipmentList::class.java)
+            startActivity(clickintent)
+        }))
+
 
     }
 }

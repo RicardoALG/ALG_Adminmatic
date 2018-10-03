@@ -8,7 +8,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +37,10 @@
                     android:background="@drawable/borderbottom"
                     android:orientation="horizontal"
                     android:outlineProvider="bounds"
-                    android:paddingBottom="2dp"
                     android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
                     android:paddingRight="8dp"
+                    android:paddingBottom="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

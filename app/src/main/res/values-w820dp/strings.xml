@@ -4,4 +4,7 @@
     <string name="qty">Qty</string>
     <string name="txt_date">3/13</string>
     <string name="searchImageTags">Search Image Tags</string>
+    <string name="search_forEquipment">Search for Equipment</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
 </resources>
