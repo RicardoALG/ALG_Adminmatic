@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".FragEqCrew">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/crewContainer"
         android:layout_width="match_parent"
@@ -96,8 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/paleYellow"
-            app:layout_constraintTop_toBottomOf="@id/crewScroll"
-            app:layout_constraintBottom_toTopOf="@id/footer"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
@@ -114,46 +111,26 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/footer"
+            android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#073201"
-            app:layout_constraintBottom_toBottomOf="@id/crewContainer"
-            app:layout_constraintEnd_toEndOf="@id/crewContainer"
-            app:layout_constraintStart_toStartOf="@id/crewContainer">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:gravity="center_horizontal"
-                android:paddingTop="10dp"
-                android:text="@string/view_s_schedule"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_schedule_settings"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageButton
-                android:id="@+id/btn_schedule_settings"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/colorPrimary"
-                android:scaleType="fitCenter"
+                android:text="position test"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_settings" />
-
+                app:layout_constraintStart_toStartOf="parent" />
         </android.support.constraint.ConstraintLayout>
+
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
