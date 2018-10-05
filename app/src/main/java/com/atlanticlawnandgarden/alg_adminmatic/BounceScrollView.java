@@ -7,7 +7,7 @@ import android.widget.ScrollView;
 
 public class BounceScrollView extends ScrollView
 {
-    private static final int MAX_Y_OVERSCROLL_DISTANCE = 200;
+    private static final int MAX_Y_OVERSCROLL_DISTANCE = 100;
 
     private Context mContext;
     private int mMaxYOverscrollDistance;
