@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.DatePicker
 import android.widget.Spinner
 import android.widget.TextView
@@ -20,7 +19,7 @@ class PerformanceList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_performance_list)
 
-        btn_home.setOnClickListener(({
+        btn_edit.setOnClickListener(({
             var clickintent = Intent(this@PerformanceList, MainMenu::class.java)
             startActivity(clickintent)
         }))

@@ -11,7 +11,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#073201"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,14 +29,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
             android:text="@string/Welcome"
             android:textColor="@color/colorAccent"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,211 +45,84 @@
 
     <com.atlanticlawnandgarden.alg_adminmatic.BounceScrollView
         android:id="@+id/scrollView"
-        android:overScrollMode="always"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0">
-
+        android:layout_height="wrap_content"
+        android:overScrollMode="always"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:orientation="vertical">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:weightSum="2">
 
-                <ImageButton
+                <LinearLayout
                     android:id="@+id/btn_employees"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_employees"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/palePurple"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
-                <ImageButton
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="25dp"
+                        android:src="@drawable/ic_employees" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/employee"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/btn_customers"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_customers"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/btn_employees"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-            </TableRow>
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/palePurple"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:weightSum="2">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="25dp"
+                        android:src="@drawable/ic_customers" />
 
-                <ImageButton
-                    android:id="@+id/btn_vendors"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_vendors"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btn_performance"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/customer"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btn_items"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_items"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_customers" />
+                </LinearLayout>
 
             </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:weightSum="2">
-
-                <ImageButton
-                    android:id="@+id/btn_schedule"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_schedule"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btn_performance"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
-
-                <ImageButton
-                    android:id="@+id/btn_performance"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_performance"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:weightSum="2">
-
-                <ImageButton
-                    android:id="@+id/btn_images"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_images"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btn_performance"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
-
-                <ImageButton
-                    android:id="@+id/btn_equipment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_equipment"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                android:weightSum="2">
-
-                <ImageButton
-                    android:id="@+id/btn_leads"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_leads"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btn_performance"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
-
-                <ImageButton
-                    android:id="@+id/btn_contracts"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/paleYellow"
-                    android:padding="25dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_contracts"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_items" />
-            </TableRow>
-
         </TableLayout>
+
+
+
+
     </com.atlanticlawnandgarden.alg_adminmatic.BounceScrollView>
 
 

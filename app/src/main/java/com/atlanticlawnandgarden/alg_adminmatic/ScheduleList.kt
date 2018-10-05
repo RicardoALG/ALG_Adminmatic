@@ -11,7 +11,7 @@ class ScheduleList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule_list)
 
-        btn_home.setOnClickListener(({
+        btn_edit.setOnClickListener(({
             var clickintent = Intent(this@ScheduleList, MainMenu::class.java)
             startActivity(clickintent)
         }))

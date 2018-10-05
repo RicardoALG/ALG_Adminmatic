@@ -11,7 +11,7 @@ class ImagesList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_images_list)
 
-        btn_home.setOnClickListener(({
+        btn_edit.setOnClickListener(({
             var clickintent = Intent(this@ImagesList, MainMenu::class.java)
             startActivity(clickintent)
         }))

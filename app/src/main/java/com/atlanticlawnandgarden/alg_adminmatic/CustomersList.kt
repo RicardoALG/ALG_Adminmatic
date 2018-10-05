@@ -11,7 +11,7 @@ class CustomersList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customers_list)
 
-        btn_home.setOnClickListener(({
+        btn_edit.setOnClickListener(({
             var clickintent = Intent(this@CustomersList, MainMenu::class.java)
             startActivity(clickintent)
         }))

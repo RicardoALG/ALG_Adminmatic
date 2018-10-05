@@ -21,34 +21,34 @@ class MainMenu : AppCompatActivity() {
             startActivity(clickintent)
         }))
 
-        btn_vendors.setOnClickListener(({
-            var clickintent = Intent(this@MainMenu, VendorList::class.java)
-            startActivity(clickintent)
-        }))
-
-        btn_items.setOnClickListener(({
-            var clickintent = Intent(this@MainMenu, ItemsList::class.java)
-            startActivity(clickintent)
-        }))
-
-        btn_schedule.setOnClickListener(({
-            var clickintent = Intent(this@MainMenu, ScheduleList::class.java)
-            startActivity(clickintent)
-        }))
-
-        btn_performance.setOnClickListener(({
-            var clickintent = Intent(this@MainMenu, PerformanceList::class.java)
-            startActivity(clickintent)
-        }))
-
-        btn_images.setOnClickListener(({
-            var clickintent = Intent(this@MainMenu, ImagesList::class.java)
-            startActivity(clickintent)
-        }))
-        btn_equipment.setOnClickListener(({
-            var clickintent = Intent(this@MainMenu, EquipmentList::class.java)
-            startActivity(clickintent)
-        }))
+//        btn_vendors.setOnClickListener(({
+//            var clickintent = Intent(this@MainMenu, VendorList::class.java)
+//            startActivity(clickintent)
+//        }))
+//
+//        btn_items.setOnClickListener(({
+//            var clickintent = Intent(this@MainMenu, ItemsList::class.java)
+//            startActivity(clickintent)
+//        }))
+//
+//        btn_schedule.setOnClickListener(({
+//            var clickintent = Intent(this@MainMenu, ScheduleList::class.java)
+//            startActivity(clickintent)
+//        }))
+//
+//        btn_performance.setOnClickListener(({
+//            var clickintent = Intent(this@MainMenu, PerformanceList::class.java)
+//            startActivity(clickintent)
+//        }))
+//
+//        btn_images.setOnClickListener(({
+//            var clickintent = Intent(this@MainMenu, ImagesList::class.java)
+//            startActivity(clickintent)
+//        }))
+//        btn_equipment.setOnClickListener(({
+//            var clickintent = Intent(this@MainMenu, EquipmentList::class.java)
+//            startActivity(clickintent)
+//        }))
 
 
     }
