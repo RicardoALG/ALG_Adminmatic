@@ -82,7 +82,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".EquipmentList" />
-        <activity android:name=".Equipment"></activity>
+        <activity android:name=".Equipment" />
+        <activity android:name=".SplashScreen"></activity>
     </application>
 
 </manifest>

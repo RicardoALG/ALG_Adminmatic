@@ -68,5 +68,8 @@
     <string name="add_equipment">Add Equipment</string>
     <string name="edit_fields">Edit Fields</string>
     <string name="equipment">Equipment</string>
+    <string name="items">Items</string>
+    <string name="vendors">Vendors</string>
+    <string name="contracts">Contracts</string>
 
 </resources>
