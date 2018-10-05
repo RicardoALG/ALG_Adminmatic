@@ -7,6 +7,8 @@
     tools:context=".SplashScreen">
 
     <android.support.constraint.ConstraintLayout
+        android:clickable="true"
+        android:id="@+id/btn_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
@@ -18,7 +20,7 @@
         <ImageView
             android:id="@+id/am_logo_spalsh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
