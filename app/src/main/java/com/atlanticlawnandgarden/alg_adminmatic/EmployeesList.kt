@@ -58,6 +58,9 @@ class EmployeesList : AppCompatActivity() {
             response: JSONObject ->
             try{
                 val resultArray = response.getJSONArray("employees")
+                var empNum = resultArray.length()
+
+                employeesNum.text = empNum.toString()+" Active Employees"
 
                 for(i in 0..resultArray.length() -1){
                     var employeeObj = resultArray.getJSONObject(i)

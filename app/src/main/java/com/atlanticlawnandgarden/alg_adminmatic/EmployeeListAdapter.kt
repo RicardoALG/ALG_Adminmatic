@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.android.volley.RequestQueue
 import com.squareup.picasso.Picasso
 
 class EmployeeListAdapter(private val list: ArrayList<EmployeeCard>,
@@ -29,6 +30,11 @@ class EmployeeListAdapter(private val list: ArrayList<EmployeeCard>,
         return list.size
     }
 
+    var volleyRequest: RequestQueue? = null
+    var employeesList: ArrayList<EmployeeCard>? = null
+    var employeeAdapter: EmployeeListAdapter? = null
+    var layoutManager: RecyclerView.LayoutManager? = null
+
 
 
 
@@ -39,10 +45,7 @@ class EmployeeListAdapter(private val list: ArrayList<EmployeeCard>,
 
         fun bindView(employeeCard: EmployeeCard) {
             title.text = employeeCard.username
-            linkButton.setOnClickListener {
-                var intent = Intent(this,EmployeesList::class.java)
-                startActivity(intent)
-            }
+
 
             if (!TextUtils.isEmpty(employeeCard.thumbnail)) {
                 Picasso.get()
@@ -53,7 +56,16 @@ class EmployeeListAdapter(private val list: ArrayList<EmployeeCard>,
             } else {
                 Picasso.get().load(R.drawable.user_placeholder).into(thumbnail)
             }
+
+            linkButton.setOnClickListener {
+                var intent = Intent(context, Employee::class.java)
+                intent.putExtra("ID",employeeCard.link.toString())
+
+                context.startActivity(intent)
+            }
         }
     }
+
+
 
 }
