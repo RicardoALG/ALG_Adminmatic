@@ -19,7 +19,7 @@ class PerformanceList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_performance_list)
 
-        btn_edit.setOnClickListener(({
+        btn_home.setOnClickListener(({
             var clickintent = Intent(this@PerformanceList, MainMenu::class.java)
             startActivity(clickintent)
         }))

@@ -27,7 +27,7 @@ class Item : AppCompatActivity() {
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
 
-        btn_edit.setOnClickListener(({
+        btn_home.setOnClickListener(({
             var clickintent = Intent(this@Item, MainMenu::class.java)
             startActivity(clickintent)
         }))

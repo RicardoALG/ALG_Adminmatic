@@ -11,7 +11,7 @@ class Employee : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee)
 
-        btn_edit.setOnClickListener(({
+        btn_home.setOnClickListener(({
             var clickintent = Intent(this@Employee, MainMenu::class.java)
             startActivity(clickintent)
         }))

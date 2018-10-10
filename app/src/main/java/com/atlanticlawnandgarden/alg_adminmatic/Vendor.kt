@@ -26,7 +26,7 @@ class Vendor : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        btn_edit.setOnClickListener(({
+        btn_home.setOnClickListener(({
             var clickintent = Intent(this@Vendor, MainMenu::class.java)
             startActivity(clickintent)
         }))

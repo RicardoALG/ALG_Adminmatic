@@ -16,7 +16,7 @@ class VendorList : AppCompatActivity() {
             startActivity(clickintent)
         }))
 
-        btn_edit.setOnClickListener(({
+        btn_home.setOnClickListener(({
             var clickintent = Intent(this@VendorList, MainMenu::class.java)
             startActivity(clickintent)
         }))

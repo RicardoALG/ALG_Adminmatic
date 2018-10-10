@@ -18,7 +18,7 @@
 
 
         <ImageButton
-            android:id="@+id/btn_edit"
+            android:id="@+id/btn_home"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
             android:queryHint="@string/search_forEquipment"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_edit"
+            app:layout_constraintEnd_toStartOf="@+id/btn_home"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

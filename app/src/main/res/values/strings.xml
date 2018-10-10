@@ -71,5 +71,7 @@
     <string name="items">Items</string>
     <string name="vendors">Vendors</string>
     <string name="contracts">Contracts</string>
+    <string name="txt_equipment_dummy">No Description Provided</string>
+    <string name="view_service_lists">View Service Lists</string>
 
 </resources>
