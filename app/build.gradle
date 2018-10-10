@@ -43,4 +43,5 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
     // use -ktx for Kotlin
     implementation 'com.dubsmash.volley:library:2.0.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

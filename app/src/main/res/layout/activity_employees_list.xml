@@ -89,58 +89,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
-
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/CustomerBtn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/borderbottom"
-                android:orientation="horizontal"
-                android:outlineProvider="bounds"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/user_placeholder" />
-
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="64dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="John McLawn"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="20dp"
-                    tools:layout_editor_absoluteX="29dp"
-                    tools:layout_editor_absoluteY="420dp" />
-
-
-            </LinearLayout>
-
-
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
 
     <TextView
         android:id="@+id/employeesNum"
@@ -156,6 +104,15 @@
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewEmployees"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/employeesNum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
 
 </android.support.constraint.ConstraintLayout>
