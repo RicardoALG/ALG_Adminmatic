@@ -1,6 +1,7 @@
 package com.atlanticlawnandgarden.alg_adminmatic
 
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.lang.Exception
 
 class Employee : AppCompatActivity() {
 
@@ -70,8 +72,11 @@ class Employee : AppCompatActivity() {
                             var pic = propertyObj.getString("pic")
                             var phone = propertyObj.getString("phone")
                             var email = propertyObj.getString("email")
-                        Log.d("Queso Pladota",email)
-                        txt_email.text=email
+
+                            var cPhone = phone
+
+                            var cleanPhone = Regex("[^A-Za-z0-9 ]")
+                            cPhone = cleanPhone.replace(cPhone,"")
 
                         ///////POPULATE ACTIVITY
 
@@ -86,7 +91,32 @@ class Employee : AppCompatActivity() {
                                     .error(R.drawable.user_placeholder)
                                     .into(employeePic)
 
+                        layout_phone_btn.setOnClickListener {
 
+                            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + cPhone))
+                            startActivity(intent)
+                        }
+
+
+
+                        layout_email_btn.setOnClickListener {
+
+                            val intent = Intent(Intent.ACTION_SENDTO)
+                            intent.type = "message/rfc822"
+                            intent.putExtra(Intent.EXTRA_EMAIL, email)
+                            intent.data = Uri.parse("mailto:$email")
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "From AdminMatic")
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
+                            try {
+
+                                startActivity(intent)
+                            } catch (e: android.content.ActivityNotFoundException) {
+                                e.printStackTrace()
+                                Log.d("Email error:", e.toString())
+                            }
+
+                        }
 
 
                     }catch (e: JSONException){

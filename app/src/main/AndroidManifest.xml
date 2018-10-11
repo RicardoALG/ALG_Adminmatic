@@ -9,6 +9,8 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -24,14 +26,11 @@
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".MainMenu">
-
-        </activity>
+        <activity android:name=".MainMenu"></activity>
         <activity android:name=".Customer" />
         <activity android:name=".Employee" />
         <activity android:name=".EmployeesList" />
@@ -87,7 +86,7 @@
         </activity>
         <activity android:name=".EquipmentList" />
         <activity android:name=".Equipment" />
-
+        <activity android:name=".DepartmentCrewList"></activity>
     </application>
 
 </manifest>
