@@ -63,7 +63,6 @@ class Employee : AppCompatActivity() {
 
 
                             var propertyObj = employeesArray.getJSONObject(0)
-                        Log.d("Camote en papas",propertyObj.toString())
                             var id = propertyObj.getString("ID")
                             var name = propertyObj.getString("name")
                             var lname = propertyObj.getString("lname")
@@ -116,6 +115,14 @@ class Employee : AppCompatActivity() {
                                 Log.d("Email error:", e.toString())
                             }
 
+                        }
+
+                        btnDepartments.setOnClickListener {
+                            var intent = Intent(this, DepartmentCrewList::class.java)
+                            intent.putExtra("empID",id)
+                            intent.putExtra("crewView",0)
+
+                            startActivity(intent)
                         }
 
 

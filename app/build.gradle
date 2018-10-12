@@ -44,4 +44,5 @@ dependencies {
     // use -ktx for Kotlin
     implementation 'com.dubsmash.volley:library:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.beust:klaxon:3.0.1'
 }
