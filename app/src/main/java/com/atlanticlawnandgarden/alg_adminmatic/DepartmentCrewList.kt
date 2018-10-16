@@ -108,13 +108,16 @@ Log.d("URL",Url+"?empID="+empID+"&crewView="+crewView)
                                 for(i in 0..departmentsArray.length() -1 ){
                                     val departmentName = departmentsArray.getJSONObject(i).getString("name")
                                     var departmentsCount = departmentsArray.getJSONObject(i).getJSONArray("employees")
+                                    var deptColor = departmentsArray.getJSONObject(i).getJSONArray("id")
 
                                     //////////////////GENERATE DEPARTMENT ROW
-
+                                    var deptBackgroundColorString = "https://www.atlanticlawnandgarden.com/uploads/dept_colors/"+deptColor+".gif"
                                     //var thumbnail2 = this.findViewById<ImageView>(R.id.thumbnail)
                                     //var departmentPic = departmentName.getString("color")
                                     var departmentCard = EmployeeCard()
                                     departmentCard.username = departmentName
+
+                                    departmentCard.thumbnail=deptBackgroundColorString
 
 
 
