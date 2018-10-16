@@ -91,16 +91,22 @@ Log.d("URL",Url+"?empID="+empID+"&crewView="+crewView)
                                 var departmentsArray: JSONArray
                                 var empNum: Number
 
+                                var iddep: String
+
                                 if(crewView=="0"){
                                     departmentsArray = response.getJSONArray("departments")
                                     empNum = departmentsArray.length()
 
                                     departmentsNum.text = empNum.toString()+" Department(s)"
+
+                                    iddep="id"
                                 } else {
                                     departmentsArray = response.getJSONArray("crews")
                                     empNum = departmentsArray.length()
 
                                     departmentsNum.text = empNum.toString()+" Crew(s)"
+
+                                    iddep="dep"
 
                                 }
 
@@ -108,12 +114,11 @@ Log.d("URL",Url+"?empID="+empID+"&crewView="+crewView)
                                 for(i in 0..departmentsArray.length() -1 ){
                                     val departmentName = departmentsArray.getJSONObject(i).getString("name")
                                     var departmentsCount = departmentsArray.getJSONObject(i).getJSONArray("employees")
-                                    var deptColor = departmentsArray.getJSONObject(i).getJSONArray("id")
+                                    var deptColor = departmentsArray.getJSONObject(i).getString(iddep)
 
                                     //////////////////GENERATE DEPARTMENT ROW
                                     var deptBackgroundColorString = "https://www.atlanticlawnandgarden.com/uploads/dept_colors/"+deptColor+".gif"
-                                    //var thumbnail2 = this.findViewById<ImageView>(R.id.thumbnail)
-                                    //var departmentPic = departmentName.getString("color")
+
                                     var departmentCard = EmployeeCard()
                                     departmentCard.username = departmentName
 
