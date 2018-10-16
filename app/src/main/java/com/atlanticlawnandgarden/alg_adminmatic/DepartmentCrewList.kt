@@ -1,17 +1,23 @@
 package com.atlanticlawnandgarden.alg_adminmatic
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.util.Log
+import android.widget.ImageView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_department_crew_list.*
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -47,6 +53,16 @@ class DepartmentCrewList : AppCompatActivity() {
 
         //getEmployee(urlString)
         getJsonObject(urlString)
+
+        btn_home.setOnClickListener(({
+            var clickintent = Intent(this@DepartmentCrewList, MainMenu::class.java)
+            startActivity(clickintent)
+        }))
+
+        btn_back.setOnClickListener(({
+            var clickintent = Intent(this@DepartmentCrewList, EmployeesList::class.java)
+            startActivity(clickintent)
+        }))
     }
 
     private fun getJsonObject(Url: String){
@@ -66,33 +82,41 @@ class DepartmentCrewList : AppCompatActivity() {
         params.put("crewView", crewView)
 
         val parameters = JSONObject(params)
-Log.d("Verdolagon",Url+"?empID="+empID+"&crewView="+crewView)
+Log.d("URL",Url+"?empID="+empID+"&crewView="+crewView)
 
         val jsonObjectReq = JsonObjectRequest(Request.Method.GET,Url+"?empID="+empID+"&crewView="+crewView,
                         Response.Listener{
                             response: JSONObject ->
                             try {
+                                var departmentsArray: JSONArray
+                                var empNum: Number
 
-                                var departmentsArray = response.getJSONArray("departments")
-                                var empNum = departmentsArray.length()
+                                if(crewView=="0"){
+                                    departmentsArray = response.getJSONArray("departments")
+                                    empNum = departmentsArray.length()
 
-                                departmentsNum.text = empNum.toString()+" Department(s)"
+                                    departmentsNum.text = empNum.toString()+" Department(s)"
+                                } else {
+                                    departmentsArray = response.getJSONArray("crews")
+                                    empNum = departmentsArray.length()
+
+                                    departmentsNum.text = empNum.toString()+" Crew(s)"
+
+                                }
 
                                 Log.d("ReturnJSON======",departmentsArray.toString())
                                 for(i in 0..departmentsArray.length() -1 ){
                                     val departmentName = departmentsArray.getJSONObject(i).getString("name")
                                     var departmentsCount = departmentsArray.getJSONObject(i).getJSONArray("employees")
-                                    Log.d("Departments:", departmentName)
-                                    Log.d("Departments Count:", departmentsArray.length().toString())
-                                    Log.d( " Employees Count:", departmentsCount.length().toString())
 
                                     //////////////////GENERATE DEPARTMENT ROW
 
-
+                                    //var thumbnail2 = this.findViewById<ImageView>(R.id.thumbnail)
                                     //var departmentPic = departmentName.getString("color")
                                     var departmentCard = EmployeeCard()
                                     departmentCard.username = departmentName
-                                    //departmentCard.thumbnail = departmentPic
+
+
 
                                     departmentslist!!.add(departmentCard)
 
@@ -120,10 +144,10 @@ Log.d("Verdolagon",Url+"?empID="+empID+"&crewView="+crewView)
                                         employeeCard.username = employeeName
                                         employeeCard.thumbnail = employeePicString
 
-                                        employeesList!!.add(employeeCard)
+                                        departmentslist!!.add(employeeCard)
 
 
-                                        employeeAdapter = DepCrewAdapter(employeesList!!,this)
+                                        employeeAdapter = DepCrewAdapter(departmentslist!!,this)
                                         layoutManager = LinearLayoutManager(this)
 
                                         //setup list

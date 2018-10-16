@@ -125,6 +125,14 @@ class Employee : AppCompatActivity() {
                             startActivity(intent)
                         }
 
+                        btnCrews.setOnClickListener {
+                            var intent = Intent(this, DepartmentCrewList::class.java)
+                            intent.putExtra("empID",id)
+                            intent.putExtra("crewView",1)
+
+                            startActivity(intent)
+                        }
+
 
                     }catch (e: JSONException){
                         e.printStackTrace()

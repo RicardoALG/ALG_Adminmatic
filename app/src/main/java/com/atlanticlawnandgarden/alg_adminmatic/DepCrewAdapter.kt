@@ -50,11 +50,11 @@ class DepCrewAdapter(private val list: ArrayList<EmployeeCard>,
             if (!TextUtils.isEmpty(employeeCard.thumbnail)) {
                 Picasso.get()
                         .load(employeeCard.thumbnail)
-                        .placeholder(R.drawable.user_placeholder)
-                        .error(R.drawable.user_placeholder)
+                        .placeholder(R.drawable.department_spacer)
+                        .error(R.drawable.department_spacer)
                         .into(thumbnail)
             } else {
-                Picasso.get().load(R.drawable.user_placeholder).into(thumbnail)
+                Picasso.get().load(R.drawable.department_spacer).into(thumbnail)
             }
 
 //            linkButton.setOnClickListener {
