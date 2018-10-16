@@ -30,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".MainMenu" />
         <activity android:name=".Customer" />
         <activity android:name=".Employee" />
         <activity android:name=".EmployeesList" />
@@ -86,7 +86,8 @@
         </activity>
         <activity android:name=".EquipmentList" />
         <activity android:name=".Equipment" />
-        <activity android:name=".DepartmentCrewList"></activity>
+        <activity android:name=".DepartmentCrewList" />
+        <activity android:name=".ShiftsList"></activity>
     </application>
 
 </manifest>

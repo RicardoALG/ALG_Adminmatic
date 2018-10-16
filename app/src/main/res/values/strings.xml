@@ -73,5 +73,10 @@
     <string name="contracts">Contracts</string>
     <string name="txt_equipment_dummy">No Description Provided</string>
     <string name="view_service_lists">View Service Lists</string>
+    <string name="txt_user_shifts_for"></string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="close">Close</string>
+    <string name="set_week">Set Week</string>
 
 </resources>

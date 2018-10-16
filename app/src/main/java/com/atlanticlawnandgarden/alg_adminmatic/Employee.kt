@@ -133,6 +133,15 @@ class Employee : AppCompatActivity() {
                             startActivity(intent)
                         }
 
+                        btnShifts.setOnClickListener {
+                            var intent = Intent(this, ShiftsList::class.java)
+                            intent.putExtra("empID",id)
+                            intent.putExtra("fName",fname)
+                            intent.putExtra("crewView",1)
+
+                            startActivity(intent)
+                        }
+
 
                     }catch (e: JSONException){
                         e.printStackTrace()
