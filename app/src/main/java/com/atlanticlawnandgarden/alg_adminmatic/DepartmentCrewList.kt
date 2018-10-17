@@ -48,7 +48,7 @@ class DepartmentCrewList : AppCompatActivity()  {
         employeesList = ArrayList<EmployeeCard>()
         volleyRequest = Volley.newRequestQueue(this)
 
-        //getEmployee(urlString)
+
         getJsonObject(urlString)
 
         btn_home.setOnClickListener(({
@@ -60,7 +60,6 @@ class DepartmentCrewList : AppCompatActivity()  {
             finish()
         }))
 
-        getJsonObject(urlString)
     }
 
 
@@ -80,30 +79,34 @@ class DepartmentCrewList : AppCompatActivity()  {
         val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
             try {
 
-            //    Log.d("REQUEST",s)
                 val array = JSONObject(s)
 
                 var departmentsArray: JSONArray
-                var empNum: Number
+                var empNum: Number =0
                 var iddep: String
 
                 if(crewView=="0"){
                     departmentsArray = array.getJSONArray("departments")
-                    empNum=array.length()
-                    shiftsNum.text = empNum.toString()+" Department(s)"
+                    //shiftsNum.text = empNum.toString()+" Department(s)"
                     iddep="id"
                     tit_depcrew.setText(R.string.departments)
+                    empNum = departmentsArray.length()
+                    shiftsNum.text = empNum.toString()+" Department(s)"
 
                 } else{
                     departmentsArray = array.getJSONArray("crews")
-                    empNum=array.length()
-                    shiftsNum.text = empNum.toString()+" Crew(s)"
+
+                    //shiftsNum.text = empNum.toString()+" Crew(s)"
                     iddep="dep"
                     tit_depcrew.setText(R.string.crews)
+                    empNum = departmentsArray.length()
+                    shiftsNum.text = empNum.toString()+" Crew(s)"
                 }
+
 
                 Log.d("ReturnJSON======",departmentsArray.toString())
                 for(i in 0..departmentsArray.length() -1 ){
+
                     val departmentName = departmentsArray.getJSONObject(i).getString("name")
                     var departmentsCount = departmentsArray.getJSONObject(i).getJSONArray("employees")
                     var deptColor = departmentsArray.getJSONObject(i).getString(iddep)
@@ -132,6 +135,7 @@ class DepartmentCrewList : AppCompatActivity()  {
                     for(j in 0..departmentsCount.length() -1){
                         val employeeName = departmentsCount.getJSONObject(j).getString("name")
                         val employeePic = departmentsCount.getJSONObject(j).getString("pic")
+
 
 
                         var employeePicString = "https://www.atlanticlawnandgarden.com/uploads/general/"+employeePic
