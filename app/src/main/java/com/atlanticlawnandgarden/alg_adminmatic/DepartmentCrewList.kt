@@ -41,7 +41,7 @@ class DepartmentCrewList : AppCompatActivity() {
 
 
 
-        var urlString = "https://www.atlanticlawnandgarden.com/cp/app/functions/zzTest/departments.php"
+        var urlString = "https://www.atlanticlawnandgarden.com/cp/app/functions/get/departments.php"
 
         departmentslist = ArrayList<EmployeeCard>()
         employeesList = ArrayList<EmployeeCard>()
@@ -77,9 +77,9 @@ class DepartmentCrewList : AppCompatActivity() {
         params.put("crewView", crewView)
 
         val parameters = JSONObject(params)
-Log.d("URL",Url+"?empID="+empID+"&crewView="+crewView)
+        
 
-        val jsonObjectReq = JsonObjectRequest(Request.Method.GET,Url+"?empID="+empID+"&crewView="+crewView,
+        val jsonObjectReq = JsonObjectRequest(Request.Method.POST,Url,parameters,
                         Response.Listener{
                             response: JSONObject ->
                             try {
