@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_department_crew_list.*
 import org.json.JSONArray
@@ -23,7 +24,7 @@ import org.json.JSONObject
 
 
 
-class DepartmentCrewList : AppCompatActivity() {
+class DepartmentCrewList : AppCompatActivity()  {
 
     var volleyRequest: RequestQueue? = null
     var departmentslist: ArrayList<EmployeeCard>? = null
@@ -58,132 +59,126 @@ class DepartmentCrewList : AppCompatActivity() {
         btn_back.setOnClickListener(({
             finish()
         }))
+
+        getJsonObject(urlString)
     }
+
+
 
     private fun getJsonObject(Url: String){
 
         var extras = intent.extras
         var empID = extras.get("empID").toString()
         var crewView = extras.get("crewView").toString()
-//        var params = JSONObject()
-//        params.put("empID", "247")
-//        params.put("crewView", "0")
-
-        Log.d("EMPID======>",empID)
-        Log.d("CrewVIEW======>",crewView)
 
         val params = HashMap<String, String>()
         params.put("empID", empID)
         params.put("crewView", crewView)
 
-        val parameters = JSONObject(params)
-        
 
-        val jsonObjectReq = JsonObjectRequest(Request.Method.POST,Url,parameters,
-                        Response.Listener{
-                            response: JSONObject ->
-                            try {
-                                var departmentsArray: JSONArray
-                                var empNum: Number
 
-                                var iddep: String
+        val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
+            try {
 
-                                if(crewView=="0"){
-                                    departmentsArray = response.getJSONArray("departments")
-                                    empNum = departmentsArray.length()
+            //    Log.d("REQUEST",s)
+                val array = JSONObject(s)
 
-                                    shiftsNum.text = empNum.toString()+" Department(s)"
+                var departmentsArray: JSONArray
+                var empNum: Number
+                var iddep: String
 
-                                    iddep="id"
-                                    tit_depcrew.setText(R.string.departments)
-                                } else {
-                                    departmentsArray = response.getJSONArray("crews")
-                                    empNum = departmentsArray.length()
+                if(crewView=="0"){
+                    departmentsArray = array.getJSONArray("departments")
+                    empNum=array.length()
+                    shiftsNum.text = empNum.toString()+" Department(s)"
+                    iddep="id"
+                    tit_depcrew.setText(R.string.departments)
 
-                                    shiftsNum.text = empNum.toString()+" Crew(s)"
+                } else{
+                    departmentsArray = array.getJSONArray("crews")
+                    empNum=array.length()
+                    shiftsNum.text = empNum.toString()+" Crew(s)"
+                    iddep="dep"
+                    tit_depcrew.setText(R.string.crews)
+                }
 
-                                    iddep="dep"
+                Log.d("ReturnJSON======",departmentsArray.toString())
+                for(i in 0..departmentsArray.length() -1 ){
+                    val departmentName = departmentsArray.getJSONObject(i).getString("name")
+                    var departmentsCount = departmentsArray.getJSONObject(i).getJSONArray("employees")
+                    var deptColor = departmentsArray.getJSONObject(i).getString(iddep)
 
-                                    tit_depcrew.setText(R.string.crews)
+                    //////////////////GENERATE DEPARTMENT ROW
+                    var deptBackgroundColorString = "https://www.atlanticlawnandgarden.com/uploads/dept_colors/"+deptColor+".gif"
 
-                                }
+                    var departmentCard = EmployeeCard()
+                    departmentCard.username = departmentName
 
-                                Log.d("ReturnJSON======",departmentsArray.toString())
-                                for(i in 0..departmentsArray.length() -1 ){
-                                    val departmentName = departmentsArray.getJSONObject(i).getString("name")
-                                    var departmentsCount = departmentsArray.getJSONObject(i).getJSONArray("employees")
-                                    var deptColor = departmentsArray.getJSONObject(i).getString(iddep)
-
-                                    //////////////////GENERATE DEPARTMENT ROW
-                                    var deptBackgroundColorString = "https://www.atlanticlawnandgarden.com/uploads/dept_colors/"+deptColor+".gif"
-
-                                    var departmentCard = EmployeeCard()
-                                    departmentCard.username = departmentName
-
-                                    departmentCard.thumbnail=deptBackgroundColorString
+                    departmentCard.thumbnail=deptBackgroundColorString
 
 
 
-                                    departmentslist!!.add(departmentCard)
+                    departmentslist!!.add(departmentCard)
 
-                                    departmentsAdapter = DepCrewAdapter(departmentslist!!,this)
-                                    layoutManager = LinearLayoutManager(this)
+                    departmentsAdapter = DepCrewAdapter(departmentslist!!,this)
+                    layoutManager = LinearLayoutManager(this)
 
-                                    //setup list
+                    //setup list
 
-                                    depcrew_list.layoutManager = layoutManager
-                                    depcrew_list.adapter = departmentsAdapter
-
-
-                                    for(j in 0..departmentsCount.length() -1){
-                                        val employeeName = departmentsCount.getJSONObject(j).getString("name")
-                                        val employeePic = departmentsCount.getJSONObject(j).getString("pic")
+                    depcrew_list.layoutManager = layoutManager
+                    depcrew_list.adapter = departmentsAdapter
 
 
-                                        var employeePicString = "https://www.atlanticlawnandgarden.com/uploads/general/"+employeePic
-                                        //var employeeID = employeeName.getString("sort")
-
-                                        /////////////////////GENERATE EMPLOYEE ROW
-
-
-                                        var employeeCard = EmployeeCard()
-                                        employeeCard.username = employeeName
-                                        employeeCard.thumbnail = employeePicString
-
-                                        departmentslist!!.add(employeeCard)
+                    for(j in 0..departmentsCount.length() -1){
+                        val employeeName = departmentsCount.getJSONObject(j).getString("name")
+                        val employeePic = departmentsCount.getJSONObject(j).getString("pic")
 
 
-                                        employeeAdapter = DepCrewAdapter(departmentslist!!,this)
-                                        layoutManager = LinearLayoutManager(this)
+                        var employeePicString = "https://www.atlanticlawnandgarden.com/uploads/general/"+employeePic
+                        //var employeeID = employeeName.getString("sort")
 
-                                        //setup list
-
-                                        depcrew_list.layoutManager = layoutManager
-                                        depcrew_list.adapter = employeeAdapter
-
-                                    }
-
-                                }
-
-                                departmentsAdapter!!.notifyDataSetChanged()
-                                //employeeAdapter!!.notifyDataSetChanged()
-
-                            }catch (e: JSONException){e.printStackTrace()}
-
-                        },
-                        Response.ErrorListener {
-                            error: VolleyError? ->
-                            try {
-
-                            } catch (e: JSONException){
-                                e.printStackTrace()
-                            }
-                        })
+                        /////////////////////GENERATE EMPLOYEE ROW
 
 
-        volleyRequest!!.add(jsonObjectReq)
+                        var employeeCard = EmployeeCard()
+                        employeeCard.username = employeeName
+                        employeeCard.thumbnail = employeePicString
+
+                        departmentslist!!.add(employeeCard)
+
+
+                        employeeAdapter = DepCrewAdapter(departmentslist!!,this)
+                        layoutManager = LinearLayoutManager(this)
+
+                        //setup list
+
+                        depcrew_list.layoutManager = layoutManager
+                        depcrew_list.adapter = employeeAdapter
+
+                    }
+
+                }
+
+                departmentsAdapter!!.notifyDataSetChanged()
+                //employeeAdapter!!.notifyDataSetChanged()
+
+
+            }catch (e: JSONException){e.printStackTrace()}
+        }, Response.ErrorListener {
+            error: VolleyError? ->
+            try {
+
+            } catch (e: JSONException){
+                e.printStackTrace()
+            }
+        }) {
+            override fun getParams(): Map<String, String> = mapOf("empID" to empID,"crewView" to crewView)
+
+        }
+
+        val  requesQueue = Volley.newRequestQueue(this)
+        requesQueue.add<String>(stringRequest)
     }
-
 
 
 
