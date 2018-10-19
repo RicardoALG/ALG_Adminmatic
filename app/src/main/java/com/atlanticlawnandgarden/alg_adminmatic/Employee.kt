@@ -1,11 +1,18 @@
 package com.atlanticlawnandgarden.alg_adminmatic
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.GridLayoutManager
 import android.text.TextUtils
 import android.util.Log
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -14,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee.*
+import kotlinx.android.synthetic.main.fragment_frag_employee.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
@@ -25,10 +33,34 @@ class Employee : AppCompatActivity() {
     var id = "229"
     var picURLprefix = "https://www.atlanticlawnandgarden.com/uploads/general/"
 
+    ////////////GALLERY STUFF
+
+    val REQUEST_CODE = 1
+
+    var customRecyclerAdapter:CustomRecyclerAdapterGal?=null
+    var imageModel:ArrayList<ImageModel> = ArrayList()
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee)
         volleyRequest = Volley.newRequestQueue(this)
+
+
+        ////////////////CHECK GALLERY PERMISSIONS
+
+        //checking permission
+        val hasPermission = ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if(hasPermission!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this@Employee, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),REQUEST_CODE)
+        }else{
+            RetrievingImages()
+            settingUpAdapter()
+        }
 
         var extras = intent.extras
 
@@ -137,7 +169,6 @@ class Employee : AppCompatActivity() {
                             var intent = Intent(this, ShiftsList::class.java)
                             intent.putExtra("empID",id)
                             intent.putExtra("fName",fname)
-                            intent.putExtra("crewView",1)
 
                             startActivity(intent)
                         }
@@ -156,6 +187,39 @@ class Employee : AppCompatActivity() {
                     }
                 })
         volleyRequest!!.add(jsonObjectReq)
+    }
+
+    //retrieving images
+    fun RetrievingImages(){
+        val imgCur = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
+
+        while (imgCur!=null && imgCur.moveToNext()){
+            var imagePath = imgCur.getString(imgCur.getColumnIndex(MediaStore.Images.Media.DATA))
+            imageModel.add(ImageModel(imagePath))
+        }
+        imgCur.close()
+    }
+
+    //setting up adapter and recyclerview
+    fun settingUpAdapter(){
+        customRecyclerAdapter = CustomRecyclerAdapterGal(imageModel)
+        val layoutManager = GridLayoutManager(applicationContext,3)
+        employee_gallery.layoutManager = layoutManager
+        employee_gallery.adapter = customRecyclerAdapter
+    }
+
+    //overriding onRequestPermissionResult
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == REQUEST_CODE) {
+            if ((grantResults[0] and grantResults.size) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
+                //retriving and setting up adapter on first run to handle crash
+                RetrievingImages()
+                settingUpAdapter()
+            } else {
+                Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 

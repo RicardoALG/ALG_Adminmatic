@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.dubsmash.volley:library:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.beust:klaxon:3.0.1'
+    implementation 'joda-time:joda-time:2.10'
 }

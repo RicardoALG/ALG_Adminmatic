@@ -78,5 +78,6 @@
     <string name="stop">Stop</string>
     <string name="close">Close</string>
     <string name="set_week">Set Week</string>
+    <string name="noData">------</string>
 
 </resources>
