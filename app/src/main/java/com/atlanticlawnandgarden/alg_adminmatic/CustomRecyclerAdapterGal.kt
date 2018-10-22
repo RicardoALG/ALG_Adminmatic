@@ -13,18 +13,26 @@ import java.io.File
 class CustomRecyclerAdapterGal(imageModel:ArrayList<ImageModel>):RecyclerView.Adapter<CustomRecyclerAdapterGal.CustomViewHolder>() {
     var imgModel = imageModel
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.emp_img,parent,false)
         return CustomViewHolder(view)
     }
 
     override fun getItemCount(): Int {
+        Log.d("IMAGE:::",imgModel.size.toString())
         return imgModel.size
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val model = imgModel[position]
-        Picasso.get().load(File(model.mPath)).into(holder.imageView)
+        //Picasso.get().load(File(model.mPath)).into(holder.imageView)
+        Picasso.get()
+                .load(model.mPath)
+                .placeholder(R.drawable.ic_images)
+                .error(R.drawable.ic_images)
+                .into(holder.imageView)
     }
 
     class CustomViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
