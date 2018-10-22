@@ -10,7 +10,6 @@ import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
@@ -22,13 +21,13 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee.*
-import kotlinx.android.synthetic.main.fragment_frag_employee.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.lang.Exception
 import java.util.HashMap
 
 class Employee : AppCompatActivity() {
+
+    var paths: ArrayList<String> =ArrayList()
 
     var volleyRequest: RequestQueue? = null
     val employeeURL = "https://www.atlanticlawnandgarden.com/cp/app/functions/get/employeeInfo.php?empID="
@@ -52,6 +51,10 @@ class Employee : AppCompatActivity() {
         setContentView(R.layout.activity_employee)
         volleyRequest = Volley.newRequestQueue(this)
 
+        val imgPhpURL = "https://www.atlanticlawnandgarden.com/cp/app/functions/get/images.php"
+
+        getJsonObjectImg(imgPhpURL)
+
 
         ////////////////CHECK GALLERY PERMISSIONS
 
@@ -60,6 +63,7 @@ class Employee : AppCompatActivity() {
         if(hasPermission!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this@Employee, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),REQUEST_CODE)
         }else{
+
             RetrievingImages()
             settingUpAdapter()
         }
@@ -194,16 +198,33 @@ class Employee : AppCompatActivity() {
     //retrieving images
     fun RetrievingImages(){
 
-        getJsonObjectImg("https://www.atlanticlawnandgarden.com/cp/app/functions/get/images.php")
+        val imgFilePath = "https://www.atlanticlawnandgarden.com/uploads/general/medium/"
 
+        var listOfPaths = paths
+        Log.d("listOfPathsCount ",listOfPaths.count().toString())
 
-        val imgCur = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
+        var imagePath =""
 
-        while (imgCur!=null && imgCur.moveToNext()){
-            var imagePath = imgCur.getString(imgCur.getColumnIndex(MediaStore.Images.Media.DATA)) ///  <----filepath to image
+        Log.d("Just beforeloadingURLs",paths.count().toString())
+        for(i in 0 until listOfPaths.count() ){
+
+            imagePath = imgFilePath+listOfPaths[i] ///  <----filepath to image
+
             imageModel.add(ImageModel(imagePath))
+
+
+            Log.d("FullURL",imagePath)
+
+
         }
-        imgCur.close()
+
+//        val imgCur = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
+//
+//        while (imgCur!=null && imgCur.moveToNext()){
+//            var imagePath = imgCur.getString(imgCur.getColumnIndex(MediaStore.Images.Media.DATA)) ///  <----filepath to image
+//            imageModel.add(ImageModel(imagePath))
+//        }
+//        imgCur.close()
     }
 
     //setting up adapter and recyclerview
@@ -220,8 +241,8 @@ class Employee : AppCompatActivity() {
             if ((grantResults[0] and grantResults.size) == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
                 //retriving and setting up adapter on first run to handle crash
-                RetrievingImages()
-                settingUpAdapter()
+//                RetrievingImages()
+//                settingUpAdapter()
             } else {
                 Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
             }
@@ -231,24 +252,26 @@ class Employee : AppCompatActivity() {
     private fun getJsonObjectImg(Url: String){
 
         val params = HashMap<String, String>()
-        params.put("uploadedBy", "247")
+
         val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
             try {
 
                 val array = JSONObject(s)
                 var imagesArray = array.getJSONArray("images")
 
-
-                for(i in 0..imagesArray.length() -1){
-                    //Log.d("imagesCajeta", imagesArray.getJSONObject("fileName").toString())
-
-
+                for(i in 0..imagesArray.length() -1 ){
+                    var imgURL = imagesArray.getJSONObject(i).getString("fileName")
+                    Log.d("Paths Count ",imgURL.toString())
+                    paths.add(imgURL)
 
 
                 }
+                Log.d("Pathst ",paths.toString())
 
+                Log.d("Paths Count ",paths.count().toString())
 
-
+                RetrievingImages()
+                settingUpAdapter()
             } catch(e:JSONException){
                 Log.d("ERROR------", e.toString())
 
@@ -266,14 +289,8 @@ class Employee : AppCompatActivity() {
             override fun getParams(): Map<String, String> = mapOf("uploadedBy" to id)
 
         }
-
         val  requestQueue = Volley.newRequestQueue(this)
         requestQueue.add<String>(stringRequest)
-
-
-
-
-
 
     }
 
