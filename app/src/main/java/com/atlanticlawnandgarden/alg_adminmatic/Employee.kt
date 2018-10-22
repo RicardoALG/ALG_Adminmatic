@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee.*
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_frag_employee.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
+import java.util.HashMap
 
 class Employee : AppCompatActivity() {
 
@@ -191,10 +193,14 @@ class Employee : AppCompatActivity() {
 
     //retrieving images
     fun RetrievingImages(){
+
+        getJsonObjectImg("https://www.atlanticlawnandgarden.com/cp/app/functions/get/images.php")
+
+
         val imgCur = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
 
         while (imgCur!=null && imgCur.moveToNext()){
-            var imagePath = imgCur.getString(imgCur.getColumnIndex(MediaStore.Images.Media.DATA))
+            var imagePath = imgCur.getString(imgCur.getColumnIndex(MediaStore.Images.Media.DATA)) ///  <----filepath to image
             imageModel.add(ImageModel(imagePath))
         }
         imgCur.close()
@@ -220,6 +226,55 @@ class Employee : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun getJsonObjectImg(Url: String){
+
+        val params = HashMap<String, String>()
+        params.put("uploadedBy", "247")
+        val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
+            try {
+
+                val array = JSONObject(s)
+                var imagesArray = array.getJSONArray("images")
+
+
+                for(i in 0..imagesArray.length() -1){
+                    //Log.d("imagesCajeta", imagesArray.getJSONObject("fileName").toString())
+
+
+
+
+                }
+
+
+
+            } catch(e:JSONException){
+                Log.d("ERROR------", e.toString())
+
+                null
+            }
+
+            }, Response.ErrorListener {
+            error: VolleyError? ->
+            try {
+                Log.d("ERROR======","V")
+            } catch (e: JSONException){
+                e.printStackTrace()
+            }
+        }) {
+            override fun getParams(): Map<String, String> = mapOf("uploadedBy" to id)
+
+        }
+
+        val  requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add<String>(stringRequest)
+
+
+
+
+
+
     }
 
 
