@@ -28,6 +28,7 @@ import java.util.HashMap
 class Employee : AppCompatActivity() {
 
     var paths: ArrayList<String> =ArrayList()
+    var customers: ArrayList<String> =ArrayList()
 
     var volleyRequest: RequestQueue? = null
     val employeeURL = "https://www.atlanticlawnandgarden.com/cp/app/functions/get/employeeInfo.php?empID="
@@ -40,6 +41,7 @@ class Employee : AppCompatActivity() {
 
     var customRecyclerAdapter:CustomRecyclerAdapterGal?=null
     var imageModel:ArrayList<ImageModel> = ArrayList()
+    var picName = ""
 
 
 
@@ -76,7 +78,12 @@ class Employee : AppCompatActivity() {
 
         getJsonObject(employeeURL+id)
 
+        employeePic.setOnClickListener (({
+            var clickintent = Intent(this@Employee, EmployeePortrait::class.java)
+            clickintent.putExtra("picPath",picURLprefix+picName)
+            startActivity(clickintent)
 
+        }))
 
         btn_home.setOnClickListener(({
             var clickintent = Intent(this@Employee, MainMenu::class.java)
@@ -107,6 +114,7 @@ class Employee : AppCompatActivity() {
                             var fname = propertyObj.getString("fname")
                             var userName = propertyObj.getString("username")
                             var pic = propertyObj.getString("pic")
+                            picName = pic
                             var phone = propertyObj.getString("phone")
                             var email = propertyObj.getString("email")
 
@@ -201,30 +209,25 @@ class Employee : AppCompatActivity() {
         val imgFilePath = "https://www.atlanticlawnandgarden.com/uploads/general/medium/"
 
         var listOfPaths = paths
+        var listOfCustomers = customers
         Log.d("listOfPathsCount ",listOfPaths.count().toString())
 
         var imagePath =""
+        var customer=""
 
         Log.d("Just beforeloadingURLs",paths.count().toString())
         for(i in 0 until listOfPaths.count() ){
 
             imagePath = imgFilePath+listOfPaths[i] ///  <----filepath to image
+            customer = listOfCustomers[i]
 
-            imageModel.add(ImageModel(imagePath))
+            imageModel.add(ImageModel(imagePath,customer))
+            //imageModel.
 
 
-            Log.d("FullURL",imagePath)
 
 
         }
-
-//        val imgCur = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
-//
-//        while (imgCur!=null && imgCur.moveToNext()){
-//            var imagePath = imgCur.getString(imgCur.getColumnIndex(MediaStore.Images.Media.DATA)) ///  <----filepath to image
-//            imageModel.add(ImageModel(imagePath))
-//        }
-//        imgCur.close()
     }
 
     //setting up adapter and recyclerview
@@ -261,14 +264,12 @@ class Employee : AppCompatActivity() {
 
                 for(i in 0..imagesArray.length() -1 ){
                     var imgURL = imagesArray.getJSONObject(i).getString("fileName")
-                    Log.d("Paths Count ",imgURL.toString())
+                    var customerName = imagesArray.getJSONObject(i).getString("customerName")
                     paths.add(imgURL)
+                    customers.add(customerName)
 
 
                 }
-                Log.d("Pathst ",paths.toString())
-
-                Log.d("Paths Count ",paths.count().toString())
 
                 RetrievingImages()
                 settingUpAdapter()

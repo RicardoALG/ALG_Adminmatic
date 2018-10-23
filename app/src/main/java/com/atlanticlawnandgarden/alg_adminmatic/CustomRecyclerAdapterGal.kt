@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import com.squareup.picasso.Picasso
 import java.io.File
 
@@ -27,15 +28,18 @@ class CustomRecyclerAdapterGal(imageModel:ArrayList<ImageModel>):RecyclerView.Ad
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val model = imgModel[position]
-        //Picasso.get().load(File(model.mPath)).into(holder.imageView)
+
         Picasso.get()
                 .load(model.mPath)
                 .placeholder(R.drawable.ic_images)
                 .error(R.drawable.ic_images)
                 .into(holder.imageView)
+        holder.textView.setText(model.customerName)
+        Log.d("culazo",model.customerName)
     }
 
     class CustomViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         var imageView = itemView.findViewById<ImageView>(R.id.img_view)
+        var textView = itemView.findViewById<TextView>(R.id.txt_customer)
     }
 }
