@@ -29,6 +29,8 @@ class Employee : AppCompatActivity() {
 
     var paths: ArrayList<String> =ArrayList()
     var customers: ArrayList<String> =ArrayList()
+    var likes: ArrayList<String> =ArrayList()
+    var descriptions: ArrayList<String> =ArrayList()
 
     var volleyRequest: RequestQueue? = null
     val employeeURL = "https://www.atlanticlawnandgarden.com/cp/app/functions/get/employeeInfo.php?empID="
@@ -217,15 +219,19 @@ class Employee : AppCompatActivity() {
 
         var imagePath =""
         var customer=""
+        var img_likes=""
+        var img_desc=""
 
         Log.d("Just beforeloadingURLs",paths.count().toString())
         for(i in 0 until listOfPaths.count() ){
 
             imagePath = imgFilePath+listOfPaths[i] ///  <----filepath to image
             customer = listOfCustomers[i]
+            img_likes = likes[i]
+            img_desc = descriptions[i]
 
-            imageModel.add(ImageModel(imagePath,customer))
-            //imageModel.
+            imageModel.add(ImageModel(imagePath,customer,img_likes,img_desc))
+            /////////////////////////////////////////////////////////////////
 
 
 
@@ -246,9 +252,6 @@ class Employee : AppCompatActivity() {
         if (requestCode == REQUEST_CODE) {
             if ((grantResults[0] and grantResults.size) == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
-                //retriving and setting up adapter on first run to handle crash
-//                RetrievingImages()
-//                settingUpAdapter()
             } else {
                 Toast.makeText(applicationContext, "Permission Granted", Toast.LENGTH_SHORT).show()
             }
@@ -256,8 +259,6 @@ class Employee : AppCompatActivity() {
     }
 
     private fun getJsonObjectImg(Url: String){
-
-        val params = HashMap<String, String>()
 
         val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
             try {
@@ -268,8 +269,12 @@ class Employee : AppCompatActivity() {
                 for(i in 0..imagesArray.length() -1 ){
                     var imgURL = imagesArray.getJSONObject(i).getString("fileName")
                     var customerName = imagesArray.getJSONObject(i).getString("customerName")
+                    var imgLikes = imagesArray.getJSONObject(i).getString("likes")
+                    var imgDescription = imagesArray.getJSONObject(i).getString("description")
                     paths.add(imgURL)
                     customers.add(customerName)
+                    likes.add(imgLikes)
+                    descriptions.add(imgDescription)
 
 
                 }

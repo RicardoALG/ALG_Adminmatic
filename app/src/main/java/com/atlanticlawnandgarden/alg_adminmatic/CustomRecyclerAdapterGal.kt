@@ -1,6 +1,7 @@
 package com.atlanticlawnandgarden.alg_adminmatic
 
-import android.support.v7.view.menu.ActionMenuItemView
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.squareup.picasso.Picasso
-import java.io.File
 
 class CustomRecyclerAdapterGal(imageModel:ArrayList<ImageModel>):RecyclerView.Adapter<CustomRecyclerAdapterGal.CustomViewHolder>() {
     var imgModel = imageModel
@@ -35,7 +36,22 @@ class CustomRecyclerAdapterGal(imageModel:ArrayList<ImageModel>):RecyclerView.Ad
                 .error(R.drawable.ic_images)
                 .into(holder.imageView)
         holder.textView.setText(model.customerName)
-        Log.d("culazo",model.customerName)
+        holder.imageView.setOnClickListener(({
+            Log.d("mama",model.customerName)
+      //      holder.imageView.context.startActivity<Gallery_Img>("picPath" to model.mPath, "name" to items.name)
+
+            var intent = Intent(holder.imageView.context, Gallery_Img::class.java)
+            intent.putExtra("picPath",model.mPath)
+
+
+        }))
+
+        holder.imageView.setOnClickListener {
+            var intent = Intent(holder.imageView.context, Gallery_Img::class.java)
+            intent.putExtra("picPath",model.mPath)
+            intent.putExtra("fName","test2")
+            holder.imageView.context.startActivity(intent)
+        }
     }
 
     class CustomViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){

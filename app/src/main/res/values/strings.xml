@@ -79,5 +79,6 @@
     <string name="close">Close</string>
     <string name="set_week">Set Week</string>
     <string name="noData">------</string>
+    <string name="gallery_image">Gallery Image</string>
 
 </resources>
