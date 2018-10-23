@@ -19,6 +19,7 @@ class EmployeePortrait : AppCompatActivity() {
 
         var extras = intent.extras
         var picPath = extras.get("picPath").toString()
+        var name = extras.get("empName").toString()
         Log.d("url",picPath)
 
         if( extras != null){
@@ -27,6 +28,8 @@ class EmployeePortrait : AppCompatActivity() {
                     .placeholder(R.drawable.user_placeholder)
                     .error(R.drawable.user_placeholder)
                     .into(employee_pic)
+
+            tit_employee.setText(name)
         }
 
         btn_back.setOnClickListener(({

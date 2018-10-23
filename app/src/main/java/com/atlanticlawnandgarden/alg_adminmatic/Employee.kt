@@ -42,6 +42,7 @@ class Employee : AppCompatActivity() {
     var customRecyclerAdapter:CustomRecyclerAdapterGal?=null
     var imageModel:ArrayList<ImageModel> = ArrayList()
     var picName = ""
+    var empName = ""
 
 
 
@@ -81,6 +82,7 @@ class Employee : AppCompatActivity() {
         employeePic.setOnClickListener (({
             var clickintent = Intent(this@Employee, EmployeePortrait::class.java)
             clickintent.putExtra("picPath",picURLprefix+picName)
+            clickintent.putExtra("empName",empName)
             startActivity(clickintent)
 
         }))
@@ -112,6 +114,7 @@ class Employee : AppCompatActivity() {
                             var name = propertyObj.getString("name")
                             var lname = propertyObj.getString("lname")
                             var fname = propertyObj.getString("fname")
+                            empName = fname
                             var userName = propertyObj.getString("username")
                             var pic = propertyObj.getString("pic")
                             picName = pic
