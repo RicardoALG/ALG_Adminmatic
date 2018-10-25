@@ -99,6 +99,11 @@ class Employee : AppCompatActivity() {
             startActivity(clickintent)
         }))
 
+        btn_login.setOnClickListener(({
+            var clickintent = Intent(this@Employee, EmployeeLogin::class.java)
+            startActivity(clickintent)
+        }))
+
 
     }
 

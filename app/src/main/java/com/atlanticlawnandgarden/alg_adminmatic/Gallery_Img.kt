@@ -27,7 +27,9 @@ class Gallery_Img : AppCompatActivity() {
                     .into(img_gal)
 
         }
-        Log.d("url",picPath)
+        btn_back.setOnClickListener(({
+            finish()
+        }))
 
 
     }

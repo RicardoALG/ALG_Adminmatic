@@ -90,7 +90,8 @@
         <activity android:name=".DepartmentCrewList" />
         <activity android:name=".ShiftsList" />
         <activity android:name=".EmployeePortrait" />
-        <activity android:name=".Gallery_Img"></activity>
+        <activity android:name=".Gallery_Img" />
+        <activity android:name=".EmployeeLogin"></activity>
     </application>
 
 </manifest>
