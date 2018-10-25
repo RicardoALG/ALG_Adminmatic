@@ -11,6 +11,17 @@ class MainMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
+        val employeePreferences = SharedPreferences(this)
+        var employeeID = employeePreferences.getEmployeeID()
+        var employeeFName = employeePreferences.getEmployeeFName()
+        var employeeLName = employeePreferences.getEmployeeLName()
+        var loginStatus = employeePreferences.getLogStatus()
+        var employeeLevel = employeePreferences.getEmployeeLevel()
+
+        tit_empName.setText(employeeFName)
+
+
+
         btn_customers.setOnClickListener(({
             var clickintent = Intent(this@MainMenu, CustomersList::class.java)
             startActivity(clickintent)

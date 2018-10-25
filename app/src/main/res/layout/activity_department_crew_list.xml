@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tit_depcrew"
+            android:id="@+id/tit_empName"
             android:layout_width="0dp"
             android:layout_height="27dp"
             android:layout_margin="8dp"

@@ -1,8 +1,10 @@
 package com.atlanticlawnandgarden.alg_adminmatic
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -12,6 +14,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_employee_login.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.time.Duration
 
 class EmployeeLogin : AppCompatActivity() {
     var volleyRequest: RequestQueue? = null
@@ -34,6 +37,22 @@ class EmployeeLogin : AppCompatActivity() {
             getJsonObject(urlConcat)
         }))
 
+        btn_loginCheck.setOnClickListener(({
+            val employeePreferences = SharedPreferences(this)
+            var employeeID = employeePreferences.getEmployeeID()
+            var employeeFName = employeePreferences.getEmployeeFName()
+            var employeeLName = employeePreferences.getEmployeeLName()
+            var loginStatus = employeePreferences.getLogStatus()
+            var employeeLevel = employeePreferences.getEmployeeLevel()
+
+
+            Log.d("SP ID", employeeID)
+            Log.d("SP FName", employeeFName)
+            Log.d("SP LName", employeeLName)
+            Log.d("SP login status", loginStatus.toString())
+            Log.d("SP level", employeeLevel.toString())
+        }))
+
     }
 
     fun getJsonObject(Url:String){
@@ -41,24 +60,46 @@ class EmployeeLogin : AppCompatActivity() {
                 Response.Listener {
                     response: JSONObject ->
                     try{
-                        val employeeLoggedIn = response.getString("loggedIn")
-                        val empLevel = response.getInt("level")
+                        var empID = response.getString("id")
+                        var empFname = response.getString("username")
+                        var empLname = response.getString("userlastname")
+                        var empLogIn = response.getString("loggedIn")
+                        var empLevel = response.getString("level")
+
+                        if(empLevel=="none"){
+                            empLevel="0"
+                        }
 
 
 
-                        //var propertyObj = employeesArray.getJSONObject(0)
+
                         val employeePreferences = SharedPreferences(this)
-                        var employeeName = employeePreferences.getEmployeeName()
+
+
+                        employeePreferences.setEmployeeID(empID)
+                        employeePreferences.setEmployeeFName(empFname)
+                        employeePreferences.setEmployeeLName(empLname)
+                        employeePreferences.setLogStatus(empLogIn.toBoolean())
+                        employeePreferences.setEmployeeLevel(empLevel.toInt())
+
+                        var employeeID = employeePreferences.getEmployeeID()
+                        var employeeFName = employeePreferences.getEmployeeFName()
+                        var employeeLName = employeePreferences.getEmployeeLName()
                         var loginStatus = employeePreferences.getLogStatus()
                         var employeeLevel = employeePreferences.getEmployeeLevel()
+                        Log.d("SP ID", employeeID)
+                        Log.d("SP FName", employeeFName)
+                        Log.d("SP LName", employeeLName)
+                        Log.d("SP login status", loginStatus.toString())
+                        Log.d("SP level", employeeLevel.toString())
 
-
-                        employeePreferences.setEmployeeName(employeeName)
-                        employeePreferences.setLogStatus(loginStatus)
-                        employeePreferences.setEmployeeLevel(employeeLevel)
-                        Log.d("url", Url)
-                        Log.d("login status", employeeLoggedIn)
-                        Log.d("level", empLevel.toString())
+                        if(empLogIn=="true"){
+                            Toast.makeText(this,"LOGIN SUCCESSFUL!",Toast.LENGTH_LONG).show()
+                            var clickintent = Intent(this@EmployeeLogin, Employee::class.java)
+                            startActivity(clickintent)
+                        } else {
+                            Toast.makeText(this,"LOG IN UNSUCCESSFUL. TRY AGAIN.",Toast.LENGTH_LONG).show()
+                        }
 
 
 

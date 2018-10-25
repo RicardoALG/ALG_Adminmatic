@@ -10,7 +10,6 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_department_crew_list.*
@@ -89,7 +88,7 @@ class DepartmentCrewList : AppCompatActivity()  {
                     departmentsArray = array.getJSONArray("departments")
                     //shiftsNum.text = empNum.toString()+" Department(s)"
                     iddep="id"
-                    tit_depcrew.setText(R.string.departments)
+                    tit_empName.setText(R.string.departments)
                     empNum = departmentsArray.length()
                     shiftsNum.text = empNum.toString()+" Department(s)"
 
@@ -98,7 +97,7 @@ class DepartmentCrewList : AppCompatActivity()  {
 
                     //shiftsNum.text = empNum.toString()+" Crew(s)"
                     iddep="dep"
-                    tit_depcrew.setText(R.string.crews)
+                    tit_empName.setText(R.string.crews)
                     empNum = departmentsArray.length()
                     shiftsNum.text = empNum.toString()+" Crew(s)"
                 }

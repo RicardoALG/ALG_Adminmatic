@@ -5,19 +5,44 @@ import android.content.Context
 class SharedPreferences (context: Context) {
 
     val PREFERENCES = "SharedPreferences"
+    val PREFERENCE_EMPLOYEE_ID = "ID"
     val PREFERENCE_EMPLOYEE = "Employee"
+    val PREFERENCE_EMPLOYEE_FNAME = "First Name"
+    val PREFERENCE_EMPLOYEE_LNAME = "Last Name"
+
     val PREFERENCE_LOG_STATUS = "false"
     val PREFERENCE_EMPLOYEE_LEVEL = "0"
 
     val preferences = context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE)
 
-    fun getEmployeeName(): String{
-        return preferences.getString(PREFERENCE_EMPLOYEE,"Employee")
+
+
+    fun getEmployeeID(): String{
+        return preferences.getString(PREFERENCE_EMPLOYEE_ID,"0")
     }
 
-    fun setEmployeeName(employee:String){
+    fun setEmployeeID(id:String){
         val editor = preferences.edit()
-        editor.putString(PREFERENCE_EMPLOYEE,employee)
+        editor.putString(PREFERENCE_EMPLOYEE_ID,id)
+        editor.apply()
+    }
+
+    fun getEmployeeFName(): String{
+        return preferences.getString(PREFERENCE_EMPLOYEE_FNAME,"Employee")
+    }
+
+    fun setEmployeeFName(employeeFname:String){
+        val editor = preferences.edit()
+        editor.putString(PREFERENCE_EMPLOYEE_FNAME,employeeFname)
+        editor.apply()
+    }
+    fun getEmployeeLName(): String{
+        return preferences.getString(PREFERENCE_EMPLOYEE_LNAME,"Employee")
+    }
+
+    fun setEmployeeLName(employeeLname:String){
+        val editor = preferences.edit()
+        editor.putString(PREFERENCE_EMPLOYEE_LNAME,employeeLname)
         editor.apply()
     }
 
