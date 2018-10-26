@@ -62,7 +62,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <Spinner
-        android:id="@+id/spinnerWeeks"
+        android:id="@+id/spinnerEmployee"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
@@ -86,9 +86,9 @@
         android:textAlignment="textEnd"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerWeeks"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerWeeks"
-        app:layout_constraintTop_toTopOf="@+id/spinnerWeeks" />
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerEmployee"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerEmployee"
+        app:layout_constraintTop_toTopOf="@+id/spinnerEmployee" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/headColumns"
@@ -98,7 +98,7 @@
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerWeeks">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerEmployee">
 
         <TextView
             android:id="@+id/tit_date"

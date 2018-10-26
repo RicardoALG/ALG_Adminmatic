@@ -3,11 +3,9 @@ package com.atlanticlawnandgarden.alg_adminmatic
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_shifts_list.*
@@ -17,10 +15,8 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.joda.time.*
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.TextView
 import android.widget.Toast
@@ -72,8 +68,8 @@ class ShiftsList : AppCompatActivity() {
 
         val shiftsVar = arrayOf("This Week", "Next Week")
 
-        spinnerWeeks.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,shiftsVar)
-        spinnerWeeks.setSelection(0,true)
+        spinnerEmployee.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,shiftsVar)
+        spinnerEmployee.setSelection(0,true)
 
 
 
@@ -91,7 +87,7 @@ class ShiftsList : AppCompatActivity() {
 
 
 
-        spinnerWeeks.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
+        spinnerEmployee.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
 
@@ -266,17 +262,17 @@ class ShiftsList : AppCompatActivity() {
             }catch (e: JSONException){
                 e.printStackTrace()
                 //Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK",Toast.LENGTH_LONG).show()
-                var spinnerPos = spinnerWeeks.selectedItemPosition
+                var spinnerPos = spinnerEmployee.selectedItemPosition
                 if(spinnerPos==1){
                     var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK",Toast.LENGTH_LONG)
                     toast.setGravity(Gravity.CENTER, 0, 0)
                     toast.show()
-                    spinnerWeeks.setSelection(0)
+                    spinnerEmployee.setSelection(0)
                 } else {
                     var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR THIS WEEK",Toast.LENGTH_LONG)
                     toast.setGravity(Gravity.CENTER, 0, 0)
                     toast.show()
-                    spinnerWeeks.setSelection(1)
+                    spinnerEmployee.setSelection(1)
                 }
 
 

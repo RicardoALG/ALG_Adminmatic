@@ -106,6 +106,12 @@ class Employee : AppCompatActivity() {
             startActivity(clickintent)
         }))
 
+        btnPayroll.setOnClickListener(({
+            var clickintent = Intent(this@Employee, Payroll::class.java)
+            clickintent.putExtra("userID",id)
+            startActivity(clickintent)
+        }))
+
 
     }
 
