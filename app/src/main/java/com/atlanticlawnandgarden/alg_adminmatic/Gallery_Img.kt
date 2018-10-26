@@ -22,6 +22,8 @@ class Gallery_Img : AppCompatActivity() {
         if( extras != null){
             Picasso.get()
                     .load(picPath)
+                    .fit()
+                    .centerCrop()
                     .placeholder(R.drawable.user_placeholder)
                     .error(R.drawable.user_placeholder)
                     .into(img_gal)

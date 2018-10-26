@@ -19,6 +19,8 @@ import java.time.Duration
 class EmployeeLogin : AppCompatActivity() {
     var volleyRequest: RequestQueue? = null
 
+
+var userName=""
     var user=""
     var pass=""
     var urlEmployeeLogin="https://www.atlanticlawnandgarden.com/cp/app/functions/other/logIn.php"
@@ -27,6 +29,13 @@ class EmployeeLogin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_employee_login)
         volleyRequest = Volley.newRequestQueue(this)
+
+        var extras = intent.extras
+
+        if( extras != null){
+            userName = extras.get("userName").toString()
+            inp_user.setText(userName)
+        }
 
 
 
@@ -37,21 +46,7 @@ class EmployeeLogin : AppCompatActivity() {
             getJsonObject(urlConcat)
         }))
 
-        btn_loginCheck.setOnClickListener(({
-            val employeePreferences = SharedPreferences(this)
-            var employeeID = employeePreferences.getEmployeeID()
-            var employeeFName = employeePreferences.getEmployeeFName()
-            var employeeLName = employeePreferences.getEmployeeLName()
-            var loginStatus = employeePreferences.getLogStatus()
-            var employeeLevel = employeePreferences.getEmployeeLevel()
 
-
-            Log.d("SP ID", employeeID)
-            Log.d("SP FName", employeeFName)
-            Log.d("SP LName", employeeLName)
-            Log.d("SP login status", loginStatus.toString())
-            Log.d("SP level", employeeLevel.toString())
-        }))
 
     }
 

@@ -8,6 +8,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee_portrait.*
 
 
+
 class EmployeePortrait : AppCompatActivity() {
 
 
@@ -24,9 +25,12 @@ class EmployeePortrait : AppCompatActivity() {
         Log.d("url",picPath)
 
 
+
         if( extras != null){
             Picasso.get()
                     .load(picPath)
+                    .fit()
+                    .centerCrop()
                     .placeholder(R.drawable.user_placeholder)
                     .error(R.drawable.user_placeholder)
                     .into(employee_pic)

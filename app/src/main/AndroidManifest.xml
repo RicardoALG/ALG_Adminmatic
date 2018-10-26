@@ -91,7 +91,8 @@
         <activity android:name=".ShiftsList" />
         <activity android:name=".EmployeePortrait" />
         <activity android:name=".Gallery_Img" />
-        <activity android:name=".EmployeeLogin"></activity>
+        <activity android:name=".EmployeeLogin" />
+        <activity android:name=".Payroll"></activity>
     </application>
 
 </manifest>

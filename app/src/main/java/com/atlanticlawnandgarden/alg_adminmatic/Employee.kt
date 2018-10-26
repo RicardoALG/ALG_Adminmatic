@@ -45,6 +45,7 @@ class Employee : AppCompatActivity() {
     var imageModel:ArrayList<ImageModel> = ArrayList()
     var picName = ""
     var empName = ""
+    var user = ""
 
 
 
@@ -101,6 +102,7 @@ class Employee : AppCompatActivity() {
 
         btn_login.setOnClickListener(({
             var clickintent = Intent(this@Employee, EmployeeLogin::class.java)
+            clickintent.putExtra("userName",user)
             startActivity(clickintent)
         }))
 
@@ -123,6 +125,7 @@ class Employee : AppCompatActivity() {
                             var fname = propertyObj.getString("fname")
                             empName = fname
                             var userName = propertyObj.getString("username")
+                            user = userName
                             var pic = propertyObj.getString("pic")
                             picName = pic
                             var phone = propertyObj.getString("phone")

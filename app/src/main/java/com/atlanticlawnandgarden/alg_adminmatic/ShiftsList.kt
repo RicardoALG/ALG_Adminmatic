@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_shifts_list.*
@@ -21,6 +23,7 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.TextView
+import android.widget.Toast
 import java.text.DecimalFormat
 
 
@@ -262,6 +265,23 @@ class ShiftsList : AppCompatActivity() {
 
             }catch (e: JSONException){
                 e.printStackTrace()
+                //Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK",Toast.LENGTH_LONG).show()
+                var spinnerPos = spinnerWeeks.selectedItemPosition
+                if(spinnerPos==1){
+                    var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK",Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    spinnerWeeks.setSelection(0)
+                } else {
+                    var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR THIS WEEK",Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    spinnerWeeks.setSelection(1)
+                }
+
+
+
+                Log.d("NO DATA RETURNED======","V")
             }
         }, Response.ErrorListener {
             error: VolleyError? ->
@@ -269,6 +289,7 @@ class ShiftsList : AppCompatActivity() {
                 Log.d("ERROR======","V")
             } catch (e: JSONException){
                 e.printStackTrace()
+
             }
         }) {
             override fun getParams(): Map<String, String> = mapOf("empID" to empID,"startDate" to weekStarts,"endDate" to weekEnds)
