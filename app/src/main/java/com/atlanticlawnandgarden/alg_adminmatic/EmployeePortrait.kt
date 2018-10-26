@@ -7,6 +7,7 @@ import android.util.Log
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee_portrait.*
 
+
 class EmployeePortrait : AppCompatActivity() {
 
 
@@ -21,6 +22,7 @@ class EmployeePortrait : AppCompatActivity() {
         var picPath = extras.get("picPath").toString()
         var name = extras.get("empName").toString()
         Log.d("url",picPath)
+
 
         if( extras != null){
             Picasso.get()
