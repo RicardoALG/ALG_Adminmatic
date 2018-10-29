@@ -63,62 +63,133 @@
 
     <Spinner
         android:id="@+id/spinnerEmployee"
-        android:layout_width="120dp"
+        android:layout_width="200dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/border_dark_bckgrnd_white"
         android:spinnerMode="dialog"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/headColumns"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_header"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header" />
+        app:layout_constraintTop_toTopOf="@+id/txt_header" />
 
     <TextView
         android:id="@+id/txt_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text=""
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="Today's payroll for "
         android:textAlignment="textEnd"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerEmployee"
         app:layout_constraintEnd_toStartOf="@+id/spinnerEmployee"
-        app:layout_constraintTop_toTopOf="@+id/spinnerEmployee" />
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
-    <EditText
-        android:id="@+id/pr_start"
+    <TextView
+        android:id="@+id/tit_startTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="true"
-        android:onClick="showDialog"
-        android:ems="10"
-        android:hint="Start"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="Start Time"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/pr_start"
         app:layout_constraintTop_toBottomOf="@+id/spinnerEmployee" />
 
-    <EditText
-        android:id="@+id/pr_end"
+    <TextView
+        android:id="@+id/pr_start"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_dark_bckgrnd_white"
+        android:clickable="true"
+        android:ems="10"
+        android:hint="Set Start Time"
+        android:inputType="text|date"
+        android:paddingRight="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tit_startTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tit_startTime" />
+
+    <TextView
+        android:id="@+id/tit_endTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="End time"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/pr_end"
+        app:layout_constraintTop_toBottomOf="@+id/tit_startTime" />
+
+    <TextView
+        android:id="@+id/pr_end"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_dark_bckgrnd_white"
         android:ems="10"
-        android:hint="End"
+        android:hint="Set End Time"
         android:inputType="time"
+        android:paddingRight="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tit_endTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tit_endTime" />
+
+
+    <TextView
+        android:id="@+id/tit_break"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="Break (mins.)"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/pr_end"
+        app:layout_constraintTop_toBottomOf="@+id/tit_endTime" />
+
+    <EditText
+        android:id="@+id/inp_break"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_dark_bckgrnd_white"
+        android:ems="10"
+        android:hint="Set Break Time"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tit_break"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tit_break" />
+
+    <Button
+        android:id="@+id/btn_reset_shift"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:text="@string/reset_shift"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pr_start" />
+        app:layout_constraintTop_toBottomOf="@+id/inp_break" />
+
 
     <TextView
         android:id="@+id/totalHoursNum"
@@ -129,7 +200,7 @@
         android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:paddingBottom="5dp"
-        android:text="@string/numActiveEmployees"
+        android:text="@string/today_s_total_hours"
         android:textAlignment="textEnd"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -137,7 +208,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
 </android.support.constraint.ConstraintLayout>
