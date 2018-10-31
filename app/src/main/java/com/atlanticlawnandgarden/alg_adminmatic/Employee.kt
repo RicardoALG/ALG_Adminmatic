@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee.*
+import kotlinx.android.synthetic.main.fragment_frag_employee.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.HashMap
@@ -44,6 +45,7 @@ class Employee : AppCompatActivity() {
     var customRecyclerAdapter:CustomRecyclerAdapterGal?=null
     var imageModel:ArrayList<ImageModel> = ArrayList()
     var picName = ""
+    var fullname =""
     var empName = ""
     var user = ""
 
@@ -109,6 +111,7 @@ class Employee : AppCompatActivity() {
         btnPayroll.setOnClickListener(({
             var clickintent = Intent(this@Employee, Payroll::class.java)
             clickintent.putExtra("userID",id)
+            clickintent.putExtra("fullname",fullname)
             startActivity(clickintent)
         }))
 
@@ -127,6 +130,7 @@ class Employee : AppCompatActivity() {
                             var propertyObj = employeesArray.getJSONObject(0)
                             var id = propertyObj.getString("ID")
                             var name = propertyObj.getString("name")
+                            fullname = name
                             var lname = propertyObj.getString("lname")
                             var fname = propertyObj.getString("fname")
                             empName = fname
