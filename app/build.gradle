@@ -4,9 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
+        dataBinding.enabled = true
         applicationId "com.atlanticlawnandgarden.alg_adminmatic"
         minSdkVersion 21
         targetSdkVersion 28
@@ -48,4 +51,5 @@ dependencies {
     implementation 'com.beust:klaxon:3.0.1'
     implementation 'joda-time:joda-time:2.10'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    //kapt "com.android.databinding:compiler:$tools_version"
 }
