@@ -6,6 +6,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import com.android.volley.toolbox.JsonObjectRequest
@@ -32,7 +33,7 @@ class Payroll : AppCompatActivity() {
     var userid=""
     var userName=""
 
-    var empID = "247"
+    var empID = ""
     var date = LocalDate()
 
     var sunday = date.withDayOfWeek(DateTimeConstants.MONDAY).minusDays(1)
@@ -40,6 +41,9 @@ class Payroll : AppCompatActivity() {
 
     var weekStarts = "2018-10-14"
     var weekEnds = "2018-10-20"
+    var lunchBreak = ""
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,13 +63,26 @@ class Payroll : AppCompatActivity() {
         var extras = intent.extras
         if( extras != null){
             userid = extras.get("userID").toString()
+            empID =  extras.get("userID").toString()
             userName= extras.get("fullname").toString()
         }
+
+        sunday = date.withDayOfWeek(DateTimeConstants.MONDAY).minusDays(1)
+        saturday = date.withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(1)
+
+        weekStarts=sunday.toString()
+        weekEnds=saturday.toString()
+
+        Log.d("sunday",sunday.toString())
+        Log.d("saturday",saturday.toString())
+
+        Log.d("wStart",weekStarts)
+        Log.d("wEnd",weekEnds)
 
 
         getEmployees(urlString)
 
-        GJO(userid, userName,this@Payroll,"https://www.atlanticlawnandgarden.com/cp/app/functions/get/shifts.php",empID,weekStarts,weekEnds)
+        GJO(userid, userName,this@Payroll,"https://www.atlanticlawnandgarden.com/cp/app/functions/get/payroll.php",empID,weekStarts,weekEnds)
 
 
 
@@ -114,11 +131,11 @@ class Payroll : AppCompatActivity() {
                 Toast.makeText(this@Payroll,"WWWW",Toast.LENGTH_LONG).show()
 
 
-//                sunday = date.withDayOfWeek(DateTimeConstants.MONDAY).minusDays(1)
-//                saturday = date.withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(1)
-//
-//                weekStarts=sunday.toString()
-//                weekEnds= saturday.toString()
+                sunday = date.withDayOfWeek(DateTimeConstants.MONDAY).minusDays(1)
+                saturday = date.withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(1)
+
+                weekStarts=sunday.toString()
+                weekEnds= saturday.toString()
 
                 for(i in 0..6 ){
                 }
@@ -157,8 +174,6 @@ class Payroll : AppCompatActivity() {
 
                 //var today = DateTime(date)
 
-
-
                 if (position==0){
 
                     sunday = date.withDayOfWeek(DateTimeConstants.MONDAY).minusDays(1)
@@ -178,9 +193,9 @@ class Payroll : AppCompatActivity() {
                 }
 
 
-                GJO(userid, userName,this@Payroll,"https://www.atlanticlawnandgarden.com/cp/app/functions/get/shifts.php",empID,weekStarts,weekEnds)
+                GJO(userid, userName,this@Payroll,"https://www.atlanticlawnandgarden.com/cp/app/functions/get/payroll.php",empID,weekStarts,weekEnds)
 
-                //getJsonObject(urlString)
+
 
 
             }
@@ -243,9 +258,7 @@ class Payroll : AppCompatActivity() {
                 Log.d("Employees name", userName)
                 spinnerEmployeePayroll.setSelection(itemPosition)
                 Log.d("Employees Array", employeesList.toString())
-                //spinnerEmployeePayroll.setSelection(getIndex(spinnerEmployeePayroll, "Dave Frank"))
 
-                //spinnerEmployee.setSelection(2,true)
 
                 //employeeAdapter!!.notifyDataSetChanged()
 
@@ -283,8 +296,10 @@ class Payroll : AppCompatActivity() {
         val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
             try {
 
+                lunchBreak = inp_break.text.toString()
+
                 val array = JSONObject(s)
-                var shiftsArray = array.getJSONObject("shifts")
+                var shiftsArray = array.getJSONObject("payroll")
 
                 Log.d("Return====",shiftsArray.toString())
 
@@ -301,24 +316,25 @@ class Payroll : AppCompatActivity() {
 
 
                     try{
-                        val start= shiftsArray.getJSONObject(i.toString())
+                        val start= shiftsArray.getJSONArray(i.toString())
 
-                        var date=start.getString("startTime")
+
+                        var date=start.getJSONObject(0).getString("startTime")
                         var thisDay=sunday.plusDays(i).toString().substring(5,10)
 
                         var weekday = sunday.plusDays(i).dayOfWeek().getAsText().substring(0,3)
-                        //weekStarts =thisDay+" ("+weekday+")"
+                        var mweekStarts =thisDay+" ("+weekday+")"
 
-                        var shortDate = weekStarts
+                        var shortDate = mweekStarts
 
 
-                        var startHour=start.getString("startTime")
+                        var startHour=start.getJSONObject(0).getString("startTime")
                         var shortStartHour = startHour.substring(11,16)
 
-                        var endHour=start.getString("endTime")
+                        var endHour=start.getJSONObject(0).getString("stopTime")
                         var shortEndHour = endHour.substring(11,16)
 
-                        var shiftQty=start.getString("shiftQty")
+                        var shiftQty=start.getJSONObject(0).getString("total")
                         var shortShiftQty = shiftQty
 
                         sumHours += shortShiftQty.toDouble()
@@ -362,11 +378,11 @@ class Payroll : AppCompatActivity() {
                     }catch(e: JSONException){
                         var thisDay=sunday.plusDays(i).toString().substring(5,10)
                         var weekday = sunday.plusDays(i).dayOfWeek().getAsText().substring(0,3)
-                        //weekStarts =thisDay+" ("+weekday+")"
+                        var mweekStarts =thisDay+" ("+weekday+")"
 
                         Log.d("Error~^^^^",e.toString())
 
-                        var shortDate = weekStarts
+                        var shortDate = mweekStarts
                         val dt =  findViewById(dateTV[i]) as TextView
                         dt.setText(shortDate)
 
@@ -391,18 +407,18 @@ class Payroll : AppCompatActivity() {
 
             }catch (e: JSONException){
                 e.printStackTrace()
-                //Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK",Toast.LENGTH_LONG).show()
-                var spinnerPos = Payroll().spinnerEmployee.selectedItemPosition
+                Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK",Toast.LENGTH_LONG).show()
+                var spinnerPos = spinnerEmployee.selectedItemPosition
                 if(spinnerPos==1){
-//                    var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR NEXT WEEK", Toast.LENGTH_LONG)
-//                    toast.setGravity(Gravity.CENTER, 0, 0)
-//                    toast.show()
-                    Payroll().spinnerEmployee.setSelection(0)
+                    var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR LAST WEEK", Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    spinnerEmployee.setSelection(0)
                 } else {
-//                    var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR THIS WEEK", Toast.LENGTH_LONG)
-//                    toast.setGravity(Gravity.CENTER, 0, 0)
-//                    toast.show()
-                    Payroll().spinnerEmployee.setSelection(1)
+                    var toast: Toast = Toast.makeText(this,"THERE ARE NO SHIFTS PROGRAMMED FOR THIS WEEK", Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    spinnerEmployee.setSelection(1)
                 }
 
 
