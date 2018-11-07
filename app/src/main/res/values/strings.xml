@@ -82,5 +82,6 @@
     <string name="gallery_image">Gallery Image</string>
     <string name="reset_shift">Reset Shift</string>
     <string name="today_s_total_hours">Today\'s total hours:</string>
+    <string name="set_shift">Set shift</string>
 
 </resources>

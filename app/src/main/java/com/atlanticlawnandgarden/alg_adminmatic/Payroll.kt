@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -20,9 +22,10 @@ import java.util.*
 import android.widget.ArrayAdapter
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
-import org.joda.time.DateTimeConstants
-import org.joda.time.LocalDate
+import kotlinx.android.synthetic.main.activity_employee_login.*
 import java.text.DecimalFormat
+import android.widget.TimePicker.OnTimeChangedListener
+import org.joda.time.*
 
 
 class Payroll : AppCompatActivity() {
@@ -39,13 +42,23 @@ class Payroll : AppCompatActivity() {
     var sunday = date.withDayOfWeek(DateTimeConstants.MONDAY).minusDays(1)
     var saturday = date.withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(1)
 
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    val today= sdf.format(Date())
+
+
+
+
     var weekStarts = "2018-10-14"
     var weekEnds = "2018-10-20"
-    var lunchBreak = ""
+    var dayStarts = "00:00"
+    var dayEnds = "00:01"
+    var lunchBreak = "0"
+    var unSet=true
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("todayyyyyy", today.toString())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payroll)
 
@@ -85,16 +98,65 @@ class Payroll : AppCompatActivity() {
         GJO(userid, userName,this@Payroll,"https://www.atlanticlawnandgarden.com/cp/app/functions/get/payroll.php",empID,weekStarts,weekEnds)
 
 
-
+        inp_break.onChange { Toast.makeText(this, it.toString(),Toast.LENGTH_SHORT).show()}
 
         pr_start.setOnClickListener {
+
+            var dS= LocalTime.parse(dayStarts)
+            var dE = LocalTime.parse(dayEnds)
+            //var dB = Minutes.parseMinutes("1")
+
+            var timeDiff = Minutes.minutesBetween(dS,dE).minutes
+
+            Log.d("dEndin millis",timeDiff.toString())
 
             val cal= Calendar.getInstance()
 
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker: TimePicker?, hour: Int, minute: Int ->
                 cal.set(Calendar.HOUR_OF_DAY,hour)
                 cal.set(Calendar.MINUTE,minute)
+                dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
+
+
+                var temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
+
                 pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
+
+                cal.set(Calendar.HOUR_OF_DAY,hour+1)
+
+
+
+                if (unSet==true){
+
+                    temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
+
+                    dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+
+                    pr_end.text=temporaryEndTime
+                    unSet=false
+                    pr_end.isEnabled=true
+                    inp_break.isEnabled=true
+                    Log.d("UNSET","TRUE")
+
+                } else {
+                    Log.d("UNSET","FALSE")
+                        if(dE<=dS){
+                            Log.d("dE < dS","Ending is earlier than Starting, therefore there's an error"+dE.toString()+"camote"+dS.toString())
+                        } else {
+                            Log.d("dE > dS","Ending is later than Starting,that's OK"+dE.toString()+"camote"+dS.toString())
+                            cal.set(Calendar.HOUR_OF_DAY,hour)
+                            pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
+                            dS= LocalTime.parse(dayStarts)
+                            dE = LocalTime.parse(dayEnds)
+
+
+                        }
+                }
+
+
+
+
+
             }
 
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),true).show()
@@ -111,16 +173,28 @@ class Payroll : AppCompatActivity() {
 
 
 
-
         pr_end.setOnClickListener {
 
             val cal= Calendar.getInstance()
 
+            var dS= LocalTime.parse(dayStarts)
+            var dE = LocalTime.parse(dayEnds)
+
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker: TimePicker?, hour: Int, minute: Int ->
                 cal.set(Calendar.HOUR_OF_DAY,hour)
                 cal.set(Calendar.MINUTE,minute)
-                pr_end.text= SimpleDateFormat("HH:mm").format(cal.time)
+                dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+
+                var temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
+
+                if(dE<=dS){
+                    pr_end.text=temporaryEndTime
+                } else {
+                }
+
             }
+
+
 
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),true).show()
         }
@@ -203,6 +277,15 @@ class Payroll : AppCompatActivity() {
         }
     }
 
+//    private fun checkTime(ds: String,de: String,lunch: Int): String{
+//
+//        var dS=LocalTime.parse(ds)
+//        var dE = LocalTime.parse(de)
+//
+//
+//
+//    }
+
     private fun getIndex(spinner: Spinner, myString: String): Int {
 
         var index = 0
@@ -220,6 +303,19 @@ class Payroll : AppCompatActivity() {
 
         return index
     }
+
+
+    //////////Input Validation
+
+    fun EditText.onChange(cb: (String) -> Unit) {
+        this.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+
 
     fun getEmployees(url: String){
         spinnerEmployeePayroll.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,employeesList)

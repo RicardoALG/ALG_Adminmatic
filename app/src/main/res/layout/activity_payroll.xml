@@ -1,9 +1,11 @@
-<layout xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".Payroll">
 
     <android.support.constraint.ConstraintLayout
@@ -143,6 +145,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/tit_endTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tit_endTime" />
@@ -173,6 +176,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/tit_break"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tit_break" />
@@ -181,6 +185,7 @@
         android:id="@+id/btn_reset_shift"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:gravity="center_horizontal"
@@ -188,8 +193,8 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/totalHoursNum"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/btn_set_shift"
+        app:layout_constraintStart_toStartOf="@+id/shifts_layout" />
 
     <Button
         android:id="@+id/btn_set_shift"
@@ -198,12 +203,12 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:gravity="center_horizontal"
-        android:text="@string/reset_shift"
+        android:text="@string/set_shift"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
+        android:enabled="false"
         app:layout_constraintBottom_toTopOf="@+id/totalHoursNum"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/inp_break" />
 
 
     <TextView
@@ -836,5 +841,3 @@
 
 
 </android.support.constraint.ConstraintLayout>
-
-</layout>
