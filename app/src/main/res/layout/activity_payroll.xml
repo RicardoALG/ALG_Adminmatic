@@ -67,10 +67,10 @@
         android:id="@+id/spinnerEmployeePayroll"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/border_dark_bckgrnd_white"
-        android:spinnerMode="dialog"
         android:gravity="center"
+        android:spinnerMode="dialog"
         android:textAlignment="center"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/txt_header_payroll"
@@ -105,7 +105,7 @@
         android:id="@+id/pr_start"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/border_dark_bckgrnd_white"
         android:clickable="true"
         android:ems="10"
@@ -135,9 +135,10 @@
         android:id="@+id/pr_end"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/border_dark_bckgrnd_white"
         android:ems="10"
+        android:enabled="false"
         android:hint="Set End Time"
         android:inputType="time"
         android:paddingRight="8dp"
@@ -145,7 +146,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/tit_endTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tit_endTime" />
@@ -166,9 +166,10 @@
         android:id="@+id/inp_break"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/border_dark_bckgrnd_white"
         android:ems="10"
+        android:enabled="false"
         android:hint="Set Break Time"
         android:inputType="number"
         android:paddingLeft="8dp"
@@ -176,7 +177,6 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="@+id/tit_break"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tit_break" />
@@ -185,7 +185,6 @@
         android:id="@+id/btn_reset_shift"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:gravity="center_horizontal"
@@ -193,7 +192,6 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/totalHoursNum"
-        app:layout_constraintEnd_toStartOf="@+id/btn_set_shift"
         app:layout_constraintStart_toStartOf="@+id/shifts_layout" />
 
     <Button
@@ -202,13 +200,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimary"
+        android:enabled="false"
         android:gravity="center_horizontal"
         android:text="@string/set_shift"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        android:enabled="false"
         app:layout_constraintBottom_toTopOf="@+id/totalHoursNum"
-        app:layout_constraintEnd_toEndOf="@+id/inp_break" />
+        app:layout_constraintEnd_toEndOf="@+id/shifts_layout" />
 
 
     <TextView

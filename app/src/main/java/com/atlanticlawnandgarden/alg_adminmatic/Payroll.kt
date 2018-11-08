@@ -51,14 +51,13 @@ class Payroll : AppCompatActivity() {
     var weekStarts = "2018-10-14"
     var weekEnds = "2018-10-20"
     var dayStarts = "00:00"
-    var dayEnds = "00:01"
-    var lunchBreak = "0"
+    var dayEnds = "23:59"
+    var lunchBreak: Int? = "25".toIntOrNull()
     var unSet=true
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("todayyyyyy", today.toString())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payroll)
 
@@ -86,12 +85,6 @@ class Payroll : AppCompatActivity() {
         weekStarts=sunday.toString()
         weekEnds=saturday.toString()
 
-        Log.d("sunday",sunday.toString())
-        Log.d("saturday",saturday.toString())
-
-        Log.d("wStart",weekStarts)
-        Log.d("wEnd",weekEnds)
-
 
         getEmployees(urlString)
 
@@ -104,50 +97,75 @@ class Payroll : AppCompatActivity() {
 
             var dS= LocalTime.parse(dayStarts)
             var dE = LocalTime.parse(dayEnds)
-            //var dB = Minutes.parseMinutes("1")
+            var dB = lunchBreak
 
             var timeDiff = Minutes.minutesBetween(dS,dE).minutes
 
             Log.d("dEndin millis",timeDiff.toString())
+            Log.d("dB",dB.toString())
 
             val cal= Calendar.getInstance()
 
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker: TimePicker?, hour: Int, minute: Int ->
                 cal.set(Calendar.HOUR_OF_DAY,hour)
                 cal.set(Calendar.MINUTE,minute)
+
+
+                Log.d("antes dS","dS"+dS.toString())
+                Log.d("antes valor dayStarts","dS"+dayStarts)
+
                 dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
+                dS= LocalTime.parse(dayStarts)
+                Log.d("despues dS ","dS"+dS.toString())
+                Log.d("despues valor dayStarts","dS"+dayStarts)
 
 
                 var temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
 
                 pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
 
-                cal.set(Calendar.HOUR_OF_DAY,hour+1)
+                //cal.set(Calendar.HOUR_OF_DAY,hour+1)
 
 
 
                 if (unSet==true){
+                    Log.d("ENTRY IF","values for dS and dE"+dS.toString()+"XXXXXXX"+dE.toString())
 
                     temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
 
-                    dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+                    //dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+                    //pr_end.text=temporaryEndTime
 
-                    pr_end.text=temporaryEndTime
                     unSet=false
                     pr_end.isEnabled=true
                     inp_break.isEnabled=true
                     Log.d("UNSET","TRUE")
+                    //pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
+                    Log.d("antes LocalTime","dS"+dS.toString())
+                    dS= LocalTime.parse(dayStarts)
+                    Log.d("despues","values for dS"+dS.toString())
+                    dE = LocalTime.parse(dayEnds)
+                    Log.d("FIRST ENTRANCE","Ending is autoatically set to 1hr later than Starting"+dS.toString()+"XXXXXXX"+dE.toString())
 
                 } else {
                     Log.d("UNSET","FALSE")
+                    Log.d("ENTRY ELSE","values for dS and dE"+dS.toString()+"XXXXXXX"+dE.toString())
                         if(dE<=dS){
-                            Log.d("dE < dS","Ending is earlier than Starting, therefore there's an error"+dE.toString()+"camote"+dS.toString())
+                            //pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
+                            //dS= LocalTime.parse(dayStarts)
+//
+//                            cal.set(Calendar.HOUR_OF_DAY,hour+1)
+//                            dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+//                            dE = LocalTime.parse(dayEnds)
+                            Log.d("dE < dS","Ending is earlier than Starting, therefore there's an error"+dS.toString()+"XXXXXXX"+dE.toString())
+
                         } else {
-                            Log.d("dE > dS","Ending is later than Starting,that's OK"+dE.toString()+"camote"+dS.toString())
+
                             cal.set(Calendar.HOUR_OF_DAY,hour)
                             pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
                             dS= LocalTime.parse(dayStarts)
                             dE = LocalTime.parse(dayEnds)
+                            Log.d("dE > dS","Ending is later than Starting,that's OK"+dS.toString()+"XXXXXXX"+dE.toString())
 
 
                         }
@@ -160,17 +178,10 @@ class Payroll : AppCompatActivity() {
             }
 
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),true).show()
+            dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
+            dS= LocalTime.parse(dayStarts)
+            dE = LocalTime.parse(dayEnds)
         }
-
-        btn_home.setOnClickListener(({
-            var clickintent = Intent(this@Payroll, MainMenu::class.java)
-            startActivity(clickintent)
-        }))
-
-        btn_back.setOnClickListener(({
-            finish()
-        }))
-
 
 
         pr_end.setOnClickListener {
@@ -184,20 +195,50 @@ class Payroll : AppCompatActivity() {
                 cal.set(Calendar.HOUR_OF_DAY,hour)
                 cal.set(Calendar.MINUTE,minute)
                 dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+                dE = LocalTime.parse(dayEnds)
 
-                var temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
+                Log.d("dayEnds","dayEnds value before IF"+dE.toString())
 
-                if(dE<=dS){
-                    pr_end.text=temporaryEndTime
+
+
+                Log.d("dS","dS value before IF"+dS.toString())
+                Log.d("dE","dE value before IF"+dE.toString())
+                if(dE>dS){
+                    pr_end.text= SimpleDateFormat("HH:mm").format(cal.time)
+                    dE = LocalTime.parse(dayEnds)
+                    Log.d("dE > dS","Ending later than Starting, chido"+dS.toString()+"XXXXXXX"+dE.toString())
                 } else {
+                    pr_end.text= SimpleDateFormat("HH:mm").format(cal.time)
+                    dE = LocalTime.parse(dayEnds)
+                    Log.d("dE > dS","Ending time CAN NOT be earlier than starting time!"+dS.toString()+"XXXXXXX"+dE.toString())
+                    //Toast.makeText(this,"Ending time CAN NOT be earlier than starting time!", Toast.LENGTH_LONG).show()
                 }
 
             }
 
+//            val timePickerDialog = TimePickerDialog(this@Payroll, timeSetListener,
+//            cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE) + 5, true)
+//            timePickerDialog.show()
 
 
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),true).show()
+            dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
+            dS= LocalTime.parse(dayStarts)
+            dE = LocalTime.parse(dayEnds)
+
+
+
+
         }
+
+        btn_home.setOnClickListener(({
+            var clickintent = Intent(this@Payroll, MainMenu::class.java)
+            startActivity(clickintent)
+        }))
+
+        btn_back.setOnClickListener(({
+            finish()
+        }))
 
         spinnerEmployeePayroll.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -220,7 +261,7 @@ class Payroll : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
                 //spinnerEmployeePayroll.setSelection(4,false)
-                Toast.makeText(this@Payroll,"onIteM Selected",Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@Payroll,"onIteM Selected",Toast.LENGTH_LONG).show()
 
 
             }
@@ -392,7 +433,7 @@ class Payroll : AppCompatActivity() {
         val stringRequest = object : StringRequest(Request.Method.POST, Url, Response.Listener { s ->
             try {
 
-                lunchBreak = inp_break.text.toString()
+                //lunchBreak = inp_break.text.toString().toInt()
 
                 val array = JSONObject(s)
                 var shiftsArray = array.getJSONObject("payroll")
