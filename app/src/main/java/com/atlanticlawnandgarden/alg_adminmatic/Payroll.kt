@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_employee_login.*
 import java.text.DecimalFormat
 import android.widget.TimePicker.OnTimeChangedListener
 import org.joda.time.*
+import java.sql.Time
 
 
 class Payroll : AppCompatActivity() {
@@ -99,10 +100,15 @@ class Payroll : AppCompatActivity() {
             var dE = LocalTime.parse(dayEnds)
             var dB = lunchBreak
 
-            var timeDiff = Minutes.minutesBetween(dS,dE).minutes
+            Log.d("antes timeDiff","////////////////////////dS    "+dS.toString()+"  dE  "+dE.toString())
 
-            Log.d("dEndin millis",timeDiff.toString())
+
+
+
             Log.d("dB",dB.toString())
+
+
+
 
             val cal= Calendar.getInstance()
 
@@ -111,16 +117,30 @@ class Payroll : AppCompatActivity() {
                 cal.set(Calendar.MINUTE,minute)
 
 
-                Log.d("antes dS","dS"+dS.toString())
-                Log.d("antes valor dayStarts","dS"+dayStarts)
+               // Log.d("antes dS","dS"+dS.toString())
+               // Log.d("antes valor dayStarts","dS"+dayStarts)
 
-                dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
+
+
+               dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
+
+
                 dS= LocalTime.parse(dayStarts)
+
+                var timeDiff = Minutes.minutesBetween(dS,dE).minutes
+
                 Log.d("despues dS ","dS"+dS.toString())
                 Log.d("despues valor dayStarts","dS"+dayStarts)
 
+                var tStart=today+" "+dayStarts
 
-                var temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
+                Log.d("dEndin millis",timeDiff.toString())
+
+                val newSID=WSStart(empID,tStart,today,this).SID
+
+
+                Log.d("sid mamitos",newSID.toString())
+
 
                 pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
 
@@ -131,7 +151,7 @@ class Payroll : AppCompatActivity() {
                 if (unSet==true){
                     Log.d("ENTRY IF","values for dS and dE"+dS.toString()+"XXXXXXX"+dE.toString())
 
-                    temporaryEndTime = SimpleDateFormat("HH:mm").format(cal.time)
+
 
                     //dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
                     //pr_end.text=temporaryEndTime
@@ -147,28 +167,31 @@ class Payroll : AppCompatActivity() {
                     dE = LocalTime.parse(dayEnds)
                     Log.d("FIRST ENTRANCE","Ending is autoatically set to 1hr later than Starting"+dS.toString()+"XXXXXXX"+dE.toString())
 
+                    checkLunchBreak(timeDiff,dB)
+
                 } else {
                     Log.d("UNSET","FALSE")
                     Log.d("ENTRY ELSE","values for dS and dE"+dS.toString()+"XXXXXXX"+dE.toString())
-                        if(dE<=dS){
-                            //pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
-                            //dS= LocalTime.parse(dayStarts)
+                    if(dE<=dS){
+                        //pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
+                        //dS= LocalTime.parse(dayStarts)
 //
 //                            cal.set(Calendar.HOUR_OF_DAY,hour+1)
 //                            dayEnds=SimpleDateFormat("HH:mm").format(cal.time)
 //                            dE = LocalTime.parse(dayEnds)
-                            Log.d("dE < dS","Ending is earlier than Starting, therefore there's an error"+dS.toString()+"XXXXXXX"+dE.toString())
+                        Log.d("dE < dS","Ending is earlier than Starting, therefore there's an error"+dS.toString()+"XXXXXXX"+dE.toString())
 
-                        } else {
+                    } else {
 
-                            cal.set(Calendar.HOUR_OF_DAY,hour)
-                            pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
-                            dS= LocalTime.parse(dayStarts)
-                            dE = LocalTime.parse(dayEnds)
-                            Log.d("dE > dS","Ending is later than Starting,that's OK"+dS.toString()+"XXXXXXX"+dE.toString())
+                        cal.set(Calendar.HOUR_OF_DAY,hour)
+                        pr_start.text= SimpleDateFormat("HH:mm").format(cal.time)
+                        dS= LocalTime.parse(dayStarts)
+                        dE = LocalTime.parse(dayEnds)
+                        Log.d("dE > dS","Ending is later than Starting,that's OK"+dS.toString()+"XXXXXXX"+dE.toString())
 
 
-                        }
+                    }
+                    checkLunchBreak(timeDiff,dB)
                 }
 
 
@@ -178,9 +201,12 @@ class Payroll : AppCompatActivity() {
             }
 
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),true).show()
-            dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
-            dS= LocalTime.parse(dayStarts)
-            dE = LocalTime.parse(dayEnds)
+            //dayStarts=SimpleDateFormat("HH:mm").format(cal.time)
+
+
+
+            // dS= LocalTime.parse(dayStarts)
+            // dE = LocalTime.parse(dayEnds)
         }
 
 
@@ -190,6 +216,12 @@ class Payroll : AppCompatActivity() {
 
             var dS= LocalTime.parse(dayStarts)
             var dE = LocalTime.parse(dayEnds)
+            var dB = lunchBreak
+
+            var timeDiff = Minutes.minutesBetween(dS,dE).minutes
+
+
+
 
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker: TimePicker?, hour: Int, minute: Int ->
                 cal.set(Calendar.HOUR_OF_DAY,hour)
@@ -206,10 +238,12 @@ class Payroll : AppCompatActivity() {
                 if(dE>dS){
                     pr_end.text= SimpleDateFormat("HH:mm").format(cal.time)
                     dE = LocalTime.parse(dayEnds)
+                    checkLunchBreak(timeDiff,dB)
                     Log.d("dE > dS","Ending later than Starting, chido"+dS.toString()+"XXXXXXX"+dE.toString())
                 } else {
                     pr_end.text= SimpleDateFormat("HH:mm").format(cal.time)
                     dE = LocalTime.parse(dayEnds)
+                    checkLunchBreak(timeDiff,dB)
                     Log.d("dE > dS","Ending time CAN NOT be earlier than starting time!"+dS.toString()+"XXXXXXX"+dE.toString())
                     //Toast.makeText(this,"Ending time CAN NOT be earlier than starting time!", Toast.LENGTH_LONG).show()
                 }
@@ -354,6 +388,36 @@ class Payroll : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+    }
+
+    ////////////////////Check for lunchBreak time
+
+    fun checkLunchBreak(hoursWorked: Int, lunchTime: Int?){
+
+        if(lunchTime!=null){
+            var result = hoursWorked-lunchTime
+            if(lunchTime>hoursWorked){
+                Log.d("//////////", "Lunch: "+lunchTime.toString()+" hoursWorked: "+hoursWorked )
+                Log.d("no mames","dB es mayor que timeDiff  xxxxx"+result)
+            } else {
+                Log.d("//////////", "Lunch: "+lunchTime.toString()+" hoursWorked: "+hoursWorked )
+                Log.d("chido","ya vas, Barrabas xxxx"+result)
+            }
+        }
+    }
+
+    ////////////////////////////DIfference in minutes
+
+    fun difference(start: Time, stop: Time): Time {
+
+        var mamitos: DateTime
+        val diff = Time(0, 0, 0)
+
+
+        diff.minutes = start.minutes - stop.minutes
+        diff.hours = start.hours - stop.hours
+
+        return diff
     }
 
 
