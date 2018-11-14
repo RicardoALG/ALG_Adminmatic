@@ -13,6 +13,11 @@ class SharedPreferences (context: Context) {
     val PREFERENCE_LOG_STATUS = "false"
     val PREFERENCE_EMPLOYEE_LEVEL = "0"
 
+    val PREFERENCE_PAYROLL_ACTIVE = false
+    val PREFERENCE_PR_START = ""
+    val PREFERENCE_PR_STOP = ""
+    val PREFERENCE_PR_LUNCH = ""
+
     val preferences = context.getSharedPreferences(PREFERENCES,Context.MODE_PRIVATE)
 
 

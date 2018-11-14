@@ -520,25 +520,25 @@ class Payroll : AppCompatActivity() {
                         val start= shiftsArray.getJSONArray(i.toString())
 
 
-                        var date=start.getJSONObject(0).getString("startTime")
-                        var thisDay=sunday.plusDays(i).toString().substring(5,10)
+                        var date: String?=start.getJSONObject(0).getString("startTime")
+                        var thisDay: String?=sunday.plusDays(i).toString().substring(5,10)
 
-                        var weekday = sunday.plusDays(i).dayOfWeek().getAsText().substring(0,3)
-                        var mweekStarts =thisDay+" ("+weekday+")"
+                        var weekday: String? = sunday.plusDays(i).dayOfWeek().getAsText().substring(0,3)
+                        var mweekStarts: String? =thisDay+" ("+weekday+")"
 
-                        var shortDate = mweekStarts
+                        var shortDate: String? = mweekStarts
 
 
-                        var startHour=start.getJSONObject(0).getString("startTime")
-                        var shortStartHour = startHour.substring(11,16)
+                        var startHour: String?=start.getJSONObject(0).getString("startTime")
+                        var shortStartHour: String? = startHour?.substring(11,16)
 
-                        var endHour=start.getJSONObject(0).getString("stopTime")
-                        var shortEndHour = endHour.substring(11,16)
+                        var endHour: String?=start.getJSONObject(0).getString("stopTime")
+                        var shortEndHour: String? = endHour?.substring(11,16)
 
-                        var shiftQty=start.getJSONObject(0).getString("total")
-                        var shortShiftQty = shiftQty
+                        var shiftQty: String?=start.getJSONObject(0).getString("total")
+                        var shortShiftQty: String? = shiftQty
 
-                        sumHours += shortShiftQty.toDouble()
+                        sumHours += shortShiftQty!!.toDouble()
 
                         if (shortShiftQty!="0.00"){
 
