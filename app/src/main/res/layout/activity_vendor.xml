@@ -100,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@id/customerName" />
 
         <LinearLayout
-            android:id="@+id/layout_phone_btn"
+            android:id="@+id/layout_btn-01"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -133,7 +133,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_email_btn"
+            android:id="@+id/layout_btn-02"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -141,8 +141,8 @@
             android:background="@color/colorPrimaryDark"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/layout_phone_btn"
-            app:layout_constraintTop_toBottomOf="@id/layout_phone_btn">
+            app:layout_constraintStart_toStartOf="@id/layout_btn-01"
+            app:layout_constraintTop_toBottomOf="@id/layout_btn-01">
 
             <ImageButton
                 android:id="@+id/btnEmail"
@@ -166,7 +166,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_address_btn"
+            android:id="@+id/layout_btn-03"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -176,8 +176,8 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/layout_email_btn"
-            app:layout_constraintTop_toBottomOf="@id/layout_email_btn">
+            app:layout_constraintStart_toStartOf="@id/layout_btn-02"
+            app:layout_constraintTop_toBottomOf="@id/layout_btn-02">
 
             <ImageButton
                 android:id="@+id/btn_address"

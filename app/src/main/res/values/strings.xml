@@ -83,5 +83,7 @@
     <string name="reset_shift">Reset Shift</string>
     <string name="today_s_total_hours">Today\'s total hours:</string>
     <string name="set_shift">Set shift</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_maps_all">Map</string>
 
 </resources>

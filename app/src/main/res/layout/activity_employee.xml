@@ -102,7 +102,7 @@
 
 
         <LinearLayout
-            android:id="@+id/layout_phone_btn"
+            android:id="@+id/layout_btn-01"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_email_btn"
+            android:id="@+id/layout_btn-02"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/txt_employee_name"
-            app:layout_constraintTop_toBottomOf="@id/layout_phone_btn">
+            app:layout_constraintTop_toBottomOf="@id/layout_btn-01">
 
             <ImageButton
                 android:id="@+id/btnEmail"

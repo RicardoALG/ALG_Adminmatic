@@ -18,9 +18,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -93,7 +93,10 @@
         <activity android:name=".EmployeePortrait" />
         <activity android:name=".Gallery_Img" />
         <activity android:name=".EmployeeLogin" />
-        <activity android:name=".Payroll"></activity>
+        <activity android:name=".Payroll" />
+        <activity
+            android:name=".MapsActivityAll"
+            android:label="@string/title_activity_maps_all"></activity>
     </application>
 
 </manifest>

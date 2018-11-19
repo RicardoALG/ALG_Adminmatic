@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
@@ -21,10 +20,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_employee.*
-import kotlinx.android.synthetic.main.fragment_frag_employee.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.HashMap
 
 class Employee : AppCompatActivity() {
 
@@ -159,7 +156,7 @@ class Employee : AppCompatActivity() {
                                     .error(R.drawable.user_placeholder)
                                     .into(employeePic)
 
-                        layout_phone_btn.setOnClickListener {
+                        layout_btn_01.setOnClickListener {
 
                             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + cPhone))
                             startActivity(intent)
@@ -167,7 +164,7 @@ class Employee : AppCompatActivity() {
 
 
 
-                        layout_email_btn.setOnClickListener {
+                        layout_btn_02.setOnClickListener {
 
                             val intent = Intent(Intent.ACTION_SENDTO)
                             intent.type = "message/rfc822"

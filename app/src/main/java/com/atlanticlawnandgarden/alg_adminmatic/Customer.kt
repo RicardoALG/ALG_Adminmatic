@@ -12,8 +12,8 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_customer.*
-import kotlinx.android.synthetic.main.emp_img.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -73,12 +73,59 @@ class Customer : AppCompatActivity() {
                     response: JSONObject ->
                     try{
                         val customerArray = response.getJSONObject("customer")
-
+                        val contactsArray = customerArray.getJSONArray("contacts")
 
 
                         var propertyObj = customerArray
+                        var contactAddress: String? = "No Address Found"
+                        var contactPhone: String? = "No Phone Found"
+                        var contactEmail: String? = "No Email Found"
+                        var contactLat: String? = null
+                        var contactLon: String? = null
+
+                        for(i in 0..contactsArray.length() -1) {
+
+                            Log.d("number of contact", contactsArray.length().toString())
+
+                            when(contactsArray.getJSONObject(i).getString("type")){
+                                "0" -> Log.d("type is", "none")
+                                "1" -> {
+                                    Log.d("FOUND", "Phone")
+                                    contactPhone = contactsArray.getJSONObject(i).getString("value")
+                                }
+                                "2" -> {
+                                    Log.d("FOUND", "Email")
+                                    contactEmail = contactsArray.getJSONObject(i).getString("value")
+                                }
+                                "3" -> Log.d("type is", "Billing Address")
+                                "4" -> {
+                                    Log.d("FOUND", "Address")
+                                    contactAddress = contactsArray.getJSONObject(i).getString("fullAddress")
+                                    contactLat = contactsArray.getJSONObject(i).getString("lat")
+                                    contactLon = contactsArray.getJSONObject(i).getString("lng")
+                                }
+                                "5" -> Log.d("type is", "Website")
+                                "6" -> Log.d("type is", "Alt Contact")
+                                "7" -> Log.d("type is", "Fax")
+                                "8" -> Log.d("type is", "Alt Phone")
+                                "9" -> Log.d("type is", "Alt Email")
+                                "10" -> Log.d("type is", "Mobile")
+                                "11" -> Log.d("type is", "Alt Mobile")
+                                "12" -> Log.d("type is", "Home Phone")
+                                "13" -> Log.d("type is", "Alt Email 2")
+                                "14" -> Log.d("type is", "Invoice Address")
+                                "15"-> Log.d("type is", "Alt Job Site")
+                                //contactPhone = contactsArray.getJSONObject(i).getString("Main Phone")
+                            }
+
+
+                        }
+
+
 
                         Log.d("customer",customerArray.toString())
+
+
 
 
 
@@ -92,9 +139,7 @@ class Customer : AppCompatActivity() {
 //                        user = userName
 //                        var pic = propertyObj.getString("pic")
 //                        picName = pic
-//                        var phone = propertyObj.getString("phone")
-//                        var email = propertyObj.getString("email")
-//
+
 //                        var cPhone = phone
 //
 //                        var cleanPhone = Regex("[^A-Za-z0-9 ]")
@@ -102,9 +147,15 @@ class Customer : AppCompatActivity() {
 
                         ///////POPULATE ACTIVITY
 
-                        txt_customer.text = name
-//                        txt_phone.text = phone
-//                        txt_email.text = email
+                        var cPhone = contactPhone.toString()
+
+                        var cleanPhone = Regex("[^A-Za-z0-9 ]")
+                        cPhone = cleanPhone.replace(cPhone,"")
+
+                        customerName.text = name
+                        txt_address.text = contactAddress
+                        txt_email.text = contactEmail
+                        txt_phone.text = contactPhone
 
 
 //                        Picasso.get()
@@ -113,20 +164,20 @@ class Customer : AppCompatActivity() {
 //                                .error(R.drawable.user_placeholder)
 //                                .into(employeePic)
 
-                        layout_phone_btn.setOnClickListener {
+                        layout_btn_01.setOnClickListener {
 
-//                            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + cPhone))
-//                            startActivity(intent)
+                            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + cPhone))
+                            startActivity(intent)
                         }
 
 
 
-                        layout_email_btn.setOnClickListener {
+                        layout_btn_02.setOnClickListener {
 
                             val intent = Intent(Intent.ACTION_SENDTO)
                             intent.type = "message/rfc822"
-//                            intent.putExtra(Intent.EXTRA_EMAIL, email)
-//                            intent.data = Uri.parse("mailto:$email")
+                            intent.putExtra(Intent.EXTRA_EMAIL, contactEmail)
+                            intent.data = Uri.parse("mailto:$contactEmail")
                             intent.putExtra(Intent.EXTRA_SUBJECT, "From AdminMatic")
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
@@ -138,6 +189,29 @@ class Customer : AppCompatActivity() {
                                 Log.d("Email error:", e.toString())
                             }
 
+                        }
+
+                        layout_btn_03.setOnClickListener {
+
+                            var clickintent = Intent(this@Customer, MapsActivityAll::class.java)
+                            clickintent.putExtra("mLat",contactLat)
+                            clickintent.putExtra("mLon",contactLon)
+                            clickintent.putExtra("customerName",name)
+
+                            try {
+
+                                startActivity(clickintent)
+                            } catch (e: ActivityNotFoundException) {
+                                e.printStackTrace()
+                                Log.d("Launch Map Error", e.toString())
+                            }
+
+//                            val gmmIntentUri = Uri.parse(contactLat+","+contactLon)
+//                            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+//                            mapIntent.setPackage("com.google.android.apps.maps")
+//                            if (mapIntent.resolveActivity(packageManager) != null) {
+//                                startActivity(mapIntent)
+//                            }
                         }
 
 //                        btnDepartments.setOnClickListener {
