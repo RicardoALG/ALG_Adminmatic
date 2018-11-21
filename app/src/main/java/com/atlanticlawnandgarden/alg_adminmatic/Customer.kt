@@ -40,6 +40,10 @@ class Customer : AppCompatActivity() {
     var empName = ""
     var user = ""
 
+    ////////////ExpandibleListView constants
+    val header: MutableList<String> = ArrayList()
+    val body: MutableList<MutableList<String>> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer)
@@ -65,6 +69,18 @@ class Customer : AppCompatActivity() {
 
 
         getJsonObject(customerURL+id)
+
+
+        ///////////////ExpandibleListView
+        title = "MORE INFO"
+        val season1: MutableList<String> = ArrayList()
+        season1.add("Mike Abbood (middle St. Account)J...")
+        season1.add("5 Middle St. Jamestown, RI")
+        season1.add("4230591")
+        season1.add("struf13@cox.net")
+        header.add("MORE INFO")
+        body.add(season1)
+        expandableListView.setAdapter(ExpandableListAdapter(this,expandableListView, header, body))
     }
 
     fun getJsonObject(Url:String){

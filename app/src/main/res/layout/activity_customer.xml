@@ -63,7 +63,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/topSectionCustomer"
-        android:layout_width="382dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/palePurple"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,8 +91,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@color/colorPrimaryDark"
-            android:orientation="horizontal"
             android:clickable="true"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/customerName"
             app:layout_constraintTop_toBottomOf="@id/customerName">
@@ -125,8 +125,8 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:background="@color/colorPrimaryDark"
-            android:orientation="horizontal"
             android:clickable="true"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/layout_btn-01"
             app:layout_constraintTop_toBottomOf="@id/layout_btn-01">
@@ -159,8 +159,8 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:background="@color/colorPrimaryDark"
-            android:orientation="horizontal"
             android:clickable="true"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/layout_btn-02"
             app:layout_constraintTop_toBottomOf="@id/layout_btn-02">
@@ -186,23 +186,22 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnMoreInfo"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
+
+        <ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimary"
-            android:text="More Info"
-            android:textColor="@color/colorAccent"
-            android:textSize="14sp"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_btn-03" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_btn-03"
+            tools:context=".Customer" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -374,6 +373,10 @@
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+
+
+
 
 
 
