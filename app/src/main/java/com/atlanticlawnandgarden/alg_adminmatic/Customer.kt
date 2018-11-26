@@ -12,7 +12,6 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_customer.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -73,13 +72,12 @@ class Customer : AppCompatActivity() {
 
         ///////////////ExpandibleListView
         title = "MORE INFO"
-        val season1: MutableList<String> = ArrayList()
-        season1.add("Mike Abbood (middle St. Account)J...")
-        season1.add("5 Middle St. Jamestown, RI")
-        season1.add("4230591")
-        season1.add("struf13@cox.net")
+        val contactInfo: MutableList<String> = ArrayList()
+        contactInfo.add("5 Middle St. Jamestown, RI")
+        contactInfo.add("4230591")
+        contactInfo.add("struf13@cox.net")
         header.add("MORE INFO")
-        body.add(season1)
+        body.add(contactInfo)
         expandableListView.setAdapter(ExpandableListAdapter(this,expandableListView, header, body))
     }
 

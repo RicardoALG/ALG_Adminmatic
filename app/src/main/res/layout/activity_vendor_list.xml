@@ -53,74 +53,19 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/vendorList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewVendors"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/employeesNum"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/vendorsNum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/ItemBtn"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:background="@drawable/borderbottom"
-                android:orientation="horizontal"
-                android:outlineProvider="bounds"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/user_placeholder" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="10dp"
-                        android:text="Diversified Services"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="10dp"
-                        android:text="230 Dry Bridge Rd, North Kingstown, RI"
-                        android:textColor="@color/gray"
-                        android:textSize="10sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
 
     <TextView
         android:id="@+id/vendorsNum"
@@ -136,6 +81,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 
