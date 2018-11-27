@@ -2,6 +2,7 @@ package com.atlanticlawnandgarden.alg_adminmatic
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -46,7 +47,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         mMap.moveCamera(CameraUpdateFactory.newLatLng(alg))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(alg, 12.0f))
 
-
+        Log.d("Maps","ActivityNormal")
     }
+
 
     }

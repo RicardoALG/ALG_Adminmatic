@@ -25,7 +25,7 @@ class Customer : AppCompatActivity() {
 
     var volleyRequest: RequestQueue? = null
     val customerURL = "https://www.atlanticlawnandgarden.com/cp/app/functions/get/customer.php?ID="
-    var id = "229"
+    var id: String? = null
     var picURLprefix = "https://www.atlanticlawnandgarden.com/uploads/general/"
 
     ////////////GALLERY STUFF
@@ -166,9 +166,9 @@ class Customer : AppCompatActivity() {
                         var cleanPhone = Regex("[^A-Za-z0-9 ]")
                         cPhone = cleanPhone.replace(cPhone,"")
 
-                        customerName.text = name
+                        vendorName.text = name
                         txt_address.text = contactAddress
-                        txt_email.text = contactEmail
+                        txt_web.text = contactEmail
                         txt_phone.text = contactPhone
 
 

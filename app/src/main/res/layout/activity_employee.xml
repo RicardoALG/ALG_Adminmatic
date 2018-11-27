@@ -162,7 +162,7 @@
                 android:src="@drawable/ic_email" />
 
             <TextView
-                android:id="@+id/txt_email"
+                android:id="@+id/txt_web"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"

@@ -147,7 +147,7 @@ class Employee : AppCompatActivity() {
 
                         txt_employee_name.text = name
                         txt_phone.text = phone
-                        txt_email.text = email
+                        txt_web.text = email
 
 
                             Picasso.get()

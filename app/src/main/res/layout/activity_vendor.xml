@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header">
 
         <TextView
-            android:id="@+id/customerName"
+            android:id="@+id/vendorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -97,7 +97,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/customerName" />
+            app:layout_constraintTop_toBottomOf="@id/vendorName" />
 
         <LinearLayout
             android:id="@+id/layout_btn-01"
@@ -108,7 +108,7 @@
             android:background="@color/colorPrimaryDark"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/customerName"
+            app:layout_constraintStart_toStartOf="@id/vendorName"
             app:layout_constraintTop_toBottomOf="@id/txt_balance">
 
             <ImageButton
@@ -127,7 +127,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="401-741-1875"
+                android:text="No phone number registered"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -145,22 +145,22 @@
             app:layout_constraintTop_toBottomOf="@id/layout_btn-01">
 
             <ImageButton
-                android:id="@+id/btnEmail"
+                android:id="@+id/btnWeb"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_email" />
+                android:src="@drawable/ic_web" />
 
             <TextView
-                android:id="@+id/txt_email"
+                android:id="@+id/txt_web"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="www.diversifiedservicesri.com"
+                android:text="No website registered."
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -189,13 +189,13 @@
                 android:src="@drawable/ic_map" />
 
             <TextView
-                android:id="@+id/addressText"
+                android:id="@+id/txt_address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="230 Dry Bridge Rd, North Kingstown, RI"
+                android:text="No address registered."
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>

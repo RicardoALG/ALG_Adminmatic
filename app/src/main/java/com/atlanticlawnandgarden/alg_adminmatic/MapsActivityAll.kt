@@ -2,6 +2,7 @@ package com.atlanticlawnandgarden.alg_adminmatic
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.android.gms.maps.*
 
 import com.google.android.gms.maps.model.LatLng
@@ -54,7 +55,7 @@ class MapsActivityAll : AppCompatActivity(), OnMapReadyCallback {
         mMap.getUiSettings().isMapToolbarEnabled
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(customerLocation, 15.0f))
 
-
+        Log.d("Maps","ActivityALL")
 
 
     }
