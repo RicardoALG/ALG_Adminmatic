@@ -53,92 +53,21 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/vendorList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewItems"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/employeesNum"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/itemsNum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/ItemBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/borderbottom"
-                android:orientation="horizontal"
-                android:outlineProvider="bounds"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="10dp"
-                        android:text="Black Cedar Mulch"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="10dp"
-                            android:text="Inventory Part Type"
-                            android:textColor="@color/gray"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/txt_cost"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingEnd="10dp"
-                            android:text="$75.00/Yard"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/gray"
-                            android:textSize="10sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
 
     <TextView
-        android:id="@+id/vendorsNum"
+        android:id="@+id/itemsNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/paleYellow"

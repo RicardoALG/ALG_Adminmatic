@@ -52,7 +52,7 @@ class VendorList : AppCompatActivity() {
 
                 Log.d("vendors", vendNum.toString()+"mamitos======"+resultArray)
 
-                vendorsNum.text = vendNum.toString()+" Active Vendors"
+                itemsNum.text = vendNum.toString()+" Active Vendors"
 
                 for(i in 0..resultArray.length() -1){
                     var vendorObj = resultArray.getJSONObject(i)

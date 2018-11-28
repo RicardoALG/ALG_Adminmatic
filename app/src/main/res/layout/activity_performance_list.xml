@@ -304,7 +304,7 @@
 
 
     <TextView
-        android:id="@+id/vendorsNum"
+        android:id="@+id/itemsNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/paleYellow"

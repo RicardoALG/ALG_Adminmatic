@@ -122,10 +122,10 @@ class Vendor : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                         cPhone = cleanPhone.replace(cPhone,"")
 
                         vendorName.text = name
-                        if(balance.isNotBlank()) txt_balance.text=balance
-                        if(mainAddress.isNotBlank()) txt_address.text= mainAddress
-                        if(website.isNotBlank()) txt_web.text = website
-                        if(phone.isNotBlank())txt_phone.text = phone
+                        if(balance.isNullOrBlank() || website == "null") else txt_balance.text=balance
+                        if(mainAddress.isNullOrBlank() || website == "null") else txt_address.text= mainAddress
+                        if(website.isNullOrBlank() || website == "null") else txt_web.text = website
+                        if(phone.isNullOrBlank() || website == "null") else txt_phone.text = phone
 
 
 
@@ -142,9 +142,10 @@ class Vendor : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                             openURL.data = Uri.parse("http://"+website)
 
 
+
                             try {
 
-                                startActivity(openURL)
+                                if(website.isNotBlank())startActivity(openURL)
                             } catch (e: ActivityNotFoundException) {
                                 e.printStackTrace()
                                 Log.d("Email error:", e.toString())
