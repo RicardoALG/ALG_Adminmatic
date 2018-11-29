@@ -78,12 +78,12 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/name"
-                android:layout_width="0dp"
+                android:id="@+id/txt_item"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:text="@string/item_name"
                 android:textColor="@color/black"
@@ -93,17 +93,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/cost"
-                android:layout_width="0dp"
+                android:id="@+id/txt_price"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:text="@string/item_cost"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/item_val"
+            android:id="@+id/txt_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -130,15 +130,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:weightSum="2"
-            app:layout_constraintTop_toBottomOf="@id/item_val">
+            app:layout_constraintTop_toBottomOf="@id/txt_description">
 
             <TextView
-                android:id="@+id/desc"
+                android:id="@+id/txt_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:text="Inventory Part"
                 android:textColor="@color/black"
@@ -148,12 +148,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tax"
+                android:id="@+id/txt_tax"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:text="Taxable"
                 android:textAlignment="textEnd"

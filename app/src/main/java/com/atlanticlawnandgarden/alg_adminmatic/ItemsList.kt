@@ -19,6 +19,11 @@ import java.lang.Exception
 
 class ItemsList : AppCompatActivity() {
 
+    val BASE_URL = "https://api.learn2crack.com"
+    private var mRecyclerView: RecyclerView? = null
+    private var mArrayList: java.util.ArrayList<AndroidVersion>? = null
+    private var mAdapter: ItemDataAdapter? = null
+
 
     var volleyRequest: RequestQueue? = null
     var itemsList: ArrayList<ItemCard>? = null

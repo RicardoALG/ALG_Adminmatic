@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.android.volley.RequestQueue
 
@@ -38,7 +37,7 @@ class ItemListAdapter(private val list: ArrayList<ItemCard>,
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var itemname = itemView.findViewById<TextView>(R.id.itemname)
-        var type = itemView.findViewById<TextView>(R.id.txt_type)
+        var type = itemView.findViewById<TextView>(R.id.txt_description)
         var price = itemView.findViewById<TextView>(R.id.txt_price_unit)
         var linkButton = itemView.findViewById<CardView>(R.id.itemRow)
 
@@ -52,6 +51,7 @@ class ItemListAdapter(private val list: ArrayList<ItemCard>,
             linkButton.setOnClickListener {
                 var intent = Intent(context, Item::class.java)
                 intent.putExtra("ID",itemCard.itemID.toString())
+                intent.putExtra("TYPE",itemCard.type.toString())
 
                 context.startActivity(intent)
             }
