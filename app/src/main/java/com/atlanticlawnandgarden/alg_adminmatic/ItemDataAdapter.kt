@@ -24,9 +24,9 @@ class ItemDataAdapter(private val mArrayList: ArrayList<AndroidVersion>) : Recyc
 
     override fun onBindViewHolder(viewHolder: ItemDataAdapter.ViewHolder, i: Int) {
 
-        var sItemName = mFilteredList!![i].getName()
+//        var sItemName = mFilteredList!![i].getName()
 
-        viewHolder.itemname.text= sItemName.toString()
+//        viewHolder.itemname.text= sItemName.toString()
 //        viewHolder.tv_version.setText(mFilteredList!![i].getVer())
 //        viewHolder.tv_api_level.setText(mFilteredList!![i].getApi())
     }
@@ -50,11 +50,12 @@ class ItemDataAdapter(private val mArrayList: ArrayList<AndroidVersion>) : Recyc
                     val filteredList = ArrayList<AndroidVersion>()
 
                     for (androidVersion in mArrayList) {
+                        /// toLowerCase PROBLEM
 
-                        if (androidVersion.getApi().toLowerCase().contains(charString) || androidVersion.getName().toLowerCase().contains(charString) || androidVersion.getVer().toLowerCase().contains(charString)) {
-
-                            filteredList.add(androidVersion)
-                        }
+//                        if (androidVersion.getApi().toLowerCase().contains(charString) || androidVersion.getName().toLowerCase().contains(charString) || androidVersion.getVer().toLowerCase().contains(charString)) {
+//
+//                            filteredList.add(androidVersion)
+//                        }
                     }
 
                     mFilteredList = filteredList
