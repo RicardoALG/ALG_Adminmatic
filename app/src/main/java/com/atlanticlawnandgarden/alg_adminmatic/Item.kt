@@ -98,7 +98,14 @@ class Item : AppCompatActivity() {
         override fun getItem(position: Int): Fragment? {
             when(position){
                 0 -> {
-                    return FragItLocate()
+                    val myFragment = FragItLocate()
+
+                    val args = Bundle()
+                    args.putDouble("lat", 19.4746919)
+                    args.putDouble("lng", -99.1177306)
+                    myFragment.setArguments(args)
+
+                    return myFragment
                 }
                 1 -> {
                     return FragItVendor()
@@ -138,7 +145,7 @@ class Item : AppCompatActivity() {
                         var numberOfVendors = vendorsArray.length()
 
 
-                        //// Array to store Lat & Lng
+                        //// Array to store Lat & Lng ugugiu
                         var vendorCoords = arrayOf<Array<String>>()
 
 

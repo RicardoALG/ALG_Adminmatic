@@ -16,9 +16,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class FragItLocate : Fragment(), OnMapReadyCallback{
+class FragItLocate : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
-
+    var lat = 23.0611707
+    var lng = -109.6975902
 
 
 
@@ -39,6 +40,7 @@ class FragItLocate : Fragment(), OnMapReadyCallback{
 
         mapFragment?.getMapAsync(this)
 
+
         return inflater.inflate(R.layout.frag_it_locate, container, false)
 
     }
@@ -46,13 +48,15 @@ class FragItLocate : Fragment(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        //mMap.setOnMarkerClickListener(this)
+        //mMap.setOnMarkerClickListener(this)57576567
         mMap.uiSettings.isZoomControlsEnabled = true
         // Add a marker in Atlantic Lawn and Garden and move the camera
-        val alg = LatLng(41.4958611, -71.3768593)
+        lat=getArguments()!!.getDouble("lat", 23.0611707)
+        lng=getArguments()!!.getDouble("lng", -109.6975902)
+        val alg = LatLng(lat,lng )
         mMap.addMarker(MarkerOptions().position(alg).title("Atlantic Lawn and Garden"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(alg))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(alg, 17.05f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(alg, 17.18f))
 
 
     }

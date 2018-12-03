@@ -40,7 +40,6 @@ class ItemsList : AppCompatActivity() {
         volleyRequest = Volley.newRequestQueue(this)
 
         getItem(urlString)
-        //ddd
 
     }
 
